@@ -158,10 +158,10 @@ Demon obs³ugi protoko³u RIP w sieciach IPv6.
 %build
 rm -f ./missing
 rm -f doc/zebra.info
-aclocal
+%{__aclocal}
 %{__autoconf}
 %{__automake}
-autoheader
+%{__autoheader}
 %configure \
 	--enable-one-vty \
 	--enable-ipv6 \
