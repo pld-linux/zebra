@@ -3,8 +3,8 @@
 Summary:	Routing daemon
 Summary(pl):	Demon routingu
 Name:		zebra
-Version:	0.91a
-Release:	7
+Version:	0.92a
+Release:	1
 License:	GPL
 Group:		Networking/Daemons
 Group(de):	Netzwerkwesen/Server
@@ -21,9 +21,11 @@ Source8:	vtysh.conf
 Source9:	%{name}.init
 Source10:	%{name}.sysconfig
 Source11:	%{name}.logrotate
-Patch0:		%{name}-info.patch
 Patch1:		%{name}-proc.patch
 Patch2:		%{name}-socket_paths.patch
+Patch3:		%{name}-autoconf.patch
+Patch4:		%{name}-automake.patch
+Patch5:		%{name}-autoheader.patch
 URL:		http://www.zebra.org/
 BuildRequires:	texinfo
 BuildRequires:	autoconf
@@ -52,14 +54,18 @@ trasy dla IPv6.
 
 %prep
 %setup  -q
-%patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
+%patch4 -p1
+%patch5 -p1
 
 %build
+rm -f ./missing
 aclocal
 autoconf
 automake -a -c
+autoheader
 %configure \
 	--enable-one-vty \
 	--enable-ipv6 \
