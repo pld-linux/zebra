@@ -64,7 +64,7 @@ LDFLAGS="-s"; export LDFLAGS
 	--enable-guile \
 	--disable-snmp
 
-make
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
