@@ -7,7 +7,7 @@ Summary(ru):	Демон маршрутизации Zebra
 Summary(uk):	Демон маршрутизац╕╖ Zebra
 Name:		zebra
 Version:	0.92a
-Release:	6
+Release:	7
 License:	GPL
 Group:		Networking/Daemons
 Source0:	ftp://ftp.zebra.org/pub/zebra/%{name}-%{version}.tar.gz
@@ -52,6 +52,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	bird
 Obsoletes:	gated
 Obsoletes:	mrt
+Obsoletes:	zebra-xs26
 
 %define		_sysconfdir /etc/%{name}
 
@@ -94,6 +95,7 @@ Summary:	BGP routing daemon
 Summary(pl):	Demon routingu BGP
 Group:		Networking/Daemons
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	zebra-xs26-bgpd
 
 %description bgpd
 BGP routing daemon. Includes IPv6 support.
@@ -118,6 +120,7 @@ Summary:	IPv6 OSPF routing daemon
 Summary(pl):	Demon routingu OSPF w sieciach IPv6
 Group:		Networking/Daemons
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	zebra-xs26-ospf6d
 
 %description ospf6d
 OSPF6 routing daemon for IPv6 networks.
@@ -142,6 +145,7 @@ Summary:	IPv6 RIP routing daemon
 Summary(pl):	Demon routingu RIP w sieciach IPv6
 Group:		Networking/Daemons
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	zebra-xs26-ripngd
 
 %description ripngd
 RIP routing daemon for IPv6 networks.
