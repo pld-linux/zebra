@@ -38,7 +38,12 @@ case "$1" in
 		msg_starting zebra
 		daemon zebra -d 
 		RETVAL=$?
-		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/zebra
+		if [ $RETVAL -eq 0 ] ; then
+			touch /var/lock/subsys/zebra
+			if [ -f /etc/zebra/Zebra.conf ] ; then
+				run_cmd "Loading zebra configuration" vtysh -b
+			fi
+		fi
 	else
 		msg_already_running "zebra"
 	fi
