@@ -9,7 +9,7 @@ diff -ru zebra-0.78c.old/doc/zebra.texi zebra-0.78c/doc/zebra.texi
 +@dircategory Net utilities:
  @direntry
 -* Zebra: (zebra).		The GNU Zebra routing software package.
-+* Zebra: (zebra)			The GNU Zebra routing software package
++* Zebra: (zebra).			The GNU Zebra routing software package
  @end direntry
  
  
