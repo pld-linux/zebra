@@ -7,7 +7,7 @@ Summary(ru):	Демон маршрутизации Zebra
 Summary(uk):	Демон маршрутизац╕╖ Zebra
 Name:		zebra
 Version:	0.93a
-Release:	1
+Release:	2
 License:	GPL
 Group:		Networking/Daemons
 Source0:	ftp://ftp.zebra.org/pub/zebra/%{name}-%{version}.tar.gz
@@ -40,7 +40,7 @@ BuildRequires:	automake
 BuildRequires:	readline-devel >= 4.1
 BuildRequires:	ncurses-devel >= 5.1
 BuildRequires:	pam-devel
-%{?_with_snmp:BuildRequires:	ucd-snmp-devel >= 4.2.5}
+%{?_with_snmp:BuildRequires:	ucd-snmp-devel >= 4.2.6}
 Prereq:		rc-scripts
 Prereq:		/sbin/chkconfig
 Provides:	routingdaemon
