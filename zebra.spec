@@ -1,6 +1,6 @@
 Summary:	Routing daemon
 Name:		zebra
-Version:	0.86
+Version:	0.87
 Release:	1
 License:	GPL
 Group:		Networking/Daemons
@@ -68,7 +68,7 @@ LDFLAGS="-s"; export LDFLAGS
 	--enable-ipv6 \
 	--enable-guile \
 	--enable-netlink \
-	--disable-snmp
+	--enable-snmp
 
 %{__make}
 
