@@ -6,24 +6,24 @@ License:	GPL
 Group:		Networking/Daemons
 Group(pl):	Sieciowe/Serwery
 Source0:	ftp://ftp.zebra.org/pub/zebra/%{name}-%{version}.tar.gz
-Source1:	zebra.conf
-Source2:	zebra-bgpd.conf
-Source3:	zebra-ospf6d.conf
-Source4:	zebra-ospfd.conf
-Source5:	zebra-ripd.conf
-Source6:	zebra-ripngd.conf
-Source7:	zebra.init
-Source8:	zebra.sysconfig
-Source9:	zebra.logrotate
-Patch0:		zebra-info.patch
-Patch1:		zebra-proc.patch
+Source1:	%{name}.conf
+Source2:	%{name}-bgpd.conf
+Source3:	%{name}-ospf6d.conf
+Source4:	%{name}-ospfd.conf
+Source5:	%{name}-ripd.conf
+Source6:	%{name}-ripngd.conf
+Source7:	%{name}.init
+Source8:	%{name}.sysconfig
+Source9:	%{name}.logrotate
+Patch0:		%{name}-info.patch
+Patch1:		%{name}-proc.patch
 URL:		http://www.zebra.org/
 BuildRequires:	texinfo
 BuildRequires:	info
 BuildRequires:	autoconf
-BuildRequires:	guile-devel
-BuildRequires:	readline-devel
-BuildRequires:	ncurses-devel
+BuildRequires:	guile-devel >= 1.4
+BuildRequires:	readline-devel >= 4.1
+BuildRequires:	ncurses-devel >= 5.1
 BuildRequires:	ucd-snmp-devel
 Prereq:		/sbin/chkconfig
 Requires:	rc-scripts
