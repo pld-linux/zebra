@@ -107,8 +107,6 @@ if [ "$1" = "0" ]; then
 	if [ -f /var/lock/subsys/zebra ]; then
 		/etc/rc.d/init.d/zebra stop >&2
 	fi
-        /sbin/install-info --delete %{_infodir}/%{name}.info.gz \
-		/etc/info-dir >&2
         /sbin/chkconfig --del zebra >&2
 fi
 
