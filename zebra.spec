@@ -25,7 +25,7 @@ BuildPrereq:	readline-devel
 BuildPrereq:	ncurses-devel
 Prereq:		/sbin/install-info
 Prereq:		/sbin/chkconfig
-Obsoletes:	mrt
+#Obsoletes:	mrt
 BuildRoot:	/tmp/%{name}-%{version}-root
 
 %define		_sysconfdir /etc/%{name}
