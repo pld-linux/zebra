@@ -16,7 +16,6 @@ Source7:	zebra.init
 Source8:	zebra.sysconfig
 Source9:	zebra.log
 Patch0:		zebra-info.patch
-Patch1:		zebra-linux.patch
 URL:		http://www.zebra.org/
 BuildRequires:	texinfo
 BuildRequires:	info
@@ -53,9 +52,8 @@ Guile interface for zebra routing daemon.
 Guile dla programu zebra.
 
 %prep
-%setup -q -n %{name}-%{version}
+%setup  -q
 %patch0 -p1
-#%patch1 -p1
 
 %build
 autoconf
@@ -85,12 +83,7 @@ install %{SOURCE7} $RPM_BUILD_ROOT/etc/rc.d/init.d/zebra
 install %{SOURCE8} $RPM_BUILD_ROOT/etc/sysconfig/zebra
 install %{SOURCE9} $RPM_BUILD_ROOT/etc/logrotate.d/zebra
 
-touch $RPM_BUILD_ROOT/var/log/zebra/zebra.log
-touch $RPM_BUILD_ROOT/var/log/zebra/bgpd.log
-touch $RPM_BUILD_ROOT/var/log/zebra/ospf6d.log
-touch $RPM_BUILD_ROOT/var/log/zebra/ospfd.log
-touch $RPM_BUILD_ROOT/var/log/zebra/ripd.log
-touch $RPM_BUILD_ROOT/var/log/zebra/ripngd.log
+touch $RPM_BUILD_ROOT/var/log/zebra/{zebra,bgpd,ospf6d,ospfd,ripd,ripngd}.log
 
 gzip -9nf README AUTHORS NEWS ChangeLog tools/* \
 	$RPM_BUILD_ROOT%{_infodir}/* 
@@ -98,12 +91,7 @@ gzip -9nf README AUTHORS NEWS ChangeLog tools/* \
 %post
 /sbin/install-info %{_infodir}/%{name}.info.gz /etc/info-dir >&2
 /sbin/chkconfig --add zebra >&2
-touch /var/log/zebra/zebra.log
-touch /var/log/zebra/bgpd.log
-touch /var/log/zebra/ospf6d.log
-touch /var/log/zebra/ospfd.log
-touch /var/log/zebra/ripd.log
-touch /var/log/zebra/ripngd.log
+touch $RPM_BUILD_ROOT/var/log/zebra/{zebra,bgpd,ospf6d,ospfd,ripd,ripngd}.log
 
 if [ -f /var/run/zebra.pid ]; then
 	/etc/rc.d/init.d/zebra restart >&2
