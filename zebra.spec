@@ -1,9 +1,10 @@
 #
 # _without_snmp - without SNMP support (problematic with IPv6)
 Summary:	Routing daemon
+Summary(pl):	Demon routingu
 Name:		zebra
 Version:	0.91a
-Release:	5
+Release:	6
 License:	GPL
 Group:		Networking/Daemons
 Group(de):	Netzwerkwesen/Server
@@ -31,6 +32,7 @@ BuildRequires:	readline-devel >= 4.1
 BuildRequires:	ncurses-devel >= 5.1
 %{?!_without_snmp:BuildRequires:	ucd-snmp-devel >= 4.2.1}
 Prereq:		rc-scripts
+Prereq:		/sbin/chkconfig
 Provides:	routingdaemon
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	bird
@@ -92,6 +94,9 @@ install %{SOURCE11} $RPM_BUILD_ROOT/etc/logrotate.d/zebra
 
 touch $RPM_BUILD_ROOT/var/log/zebra/{zebra,bgpd,ospf6d,ospfd,ripd,ripngd}.log
 
+%clean
+rm -rf $RPM_BUILD_ROOT
+
 %post
 [ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 /sbin/chkconfig --add zebra >&2
@@ -113,9 +118,6 @@ fi
 
 %postun
 [ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
-
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
