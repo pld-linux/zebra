@@ -1,11 +1,11 @@
 Summary:	Routing daemon
 Name:		zebra
-Version:	0.71
+Version:	0.74
 Release:	0.1
 Copyright:	GPL
 Group:		Networking/Daemons
 Group(pl):	Sieciowe/Serwery
-Source0:	ftp://ftp.zebra.org/%{name}-%{version}-pre.tar.gz
+Source0:	ftp://ftp.zebra.org/%{name}-%{version}.tar.gz
 Source1:	zebra.conf
 Source2:	zebra-bgpd.conf
 Source3:	zebra-ospf6d.conf
@@ -53,13 +53,13 @@ Guile interface for zebra routing daemon.
 Guile dla programu zebra.
 
 %prep
-%setup -q -n %{name}-%{version}-pre
+%setup -q -n %{name}-%{version}
 %patch -p1
 
 if [ -d /proc/sys/net/ipv6 ]; then
 	echo "Yor system support ipv6"
 else
-	echo "Yor system not support ipv6"
+	echo "Yor system doesn't support ipv6"
 	exit 1
 fi
 
@@ -136,7 +136,6 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %verify(not md5 size mtime) %attr(640,root,root) /etc/sysconfig/*
 %config(noreplace) %verify(not md5 size mtime) %attr(640,root,root) /etc/logrotate.d/*
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/*.conf
-%doc %{_sysconfdir}/*.sample
 %dir %attr(750,root,root) /var/log/zebra
 %ghost /var/log/zebra/*
 
