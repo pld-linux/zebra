@@ -6,7 +6,7 @@ Summary(pt_BR):	Servidor de roteamento multi-protocolo
 Summary(ru):	Демон маршрутизации Zebra
 Summary(uk):	Демон маршрутизац╕╖ Zebra
 Name:		zebra
-Version:	0.93
+Version:	0.93a
 Release:	1
 License:	GPL
 Group:		Networking/Daemons
