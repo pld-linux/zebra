@@ -1,10 +1,13 @@
 #
-# _without_snmp - without SNMP support (problematic with IPv6?)
+# _with_snmp - with SNMP support (broken?)
 Summary:	Routing daemon
 Summary(pl):	Demon routingu
+Summary(pt_BR):	Servidor de roteamento multi-protocolo
+Summary(ru):	‰≈ÕœŒ Õ¡“€“’‘…⁄¡√…… Zebra
+Summary(uk):	‰≈ÕœŒ Õ¡“€“’‘…⁄¡√¶ß Zebra
 Name:		zebra
-Version:	0.92a
-Release:	3.2
+Version:	0.93a
+Release:	2
 License:	GPL
 Group:		Networking/Daemons
 Source0:	ftp://ftp.zebra.org/pub/zebra/%{name}-%{version}.tar.gz
@@ -30,10 +33,6 @@ Source35:	%{name}-ripd.logrotate
 Patch1:		%{name}-proc.patch
 Patch2:		%{name}-socket_paths.patch
 Patch3:		%{name}-autoconf.patch
-Patch4:		%{name}-automake.patch
-Patch5:		%{name}-autoheader.patch
-Patch6:		%{name}-bgpd-timer.patch
-Patch7:		%{name}-bgpd-nexthop.patch
 URL:		http://www.zebra.org/
 BuildRequires:	texinfo
 BuildRequires:	autoconf
@@ -41,7 +40,7 @@ BuildRequires:	automake
 BuildRequires:	readline-devel >= 4.1
 BuildRequires:	ncurses-devel >= 5.1
 BuildRequires:	pam-devel
-%{?!_without_snmp:BuildRequires:	ucd-snmp-devel >= 4.2.3}
+%{?_with_snmp:BuildRequires:	ucd-snmp-devel >= 4.2.6}
 Prereq:		rc-scripts
 Prereq:		/sbin/chkconfig
 Provides:	routingdaemon
@@ -49,6 +48,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	bird
 Obsoletes:	gated
 Obsoletes:	mrt
+Obsoletes:	zebra-xs26
 
 %define		_sysconfdir /etc/%{name}
 
@@ -63,18 +63,40 @@ Daemons for each routing protocols are available in separate packages.
 Program do dynamicznego ustawiania tablicy tras. Moøe takøe ustalaÊ
 trasy dla IPv6.
 
-Demony obs≥uguj±ce poszczegÛlne protoko≥y dostÍpne s± w osobnych pakietach.
+Demony obs≥uguj±ce poszczegÛlne protoko≥y dostÍpne s± w osobnych
+pakietach.
+
+%description -l pt_BR
+Zebra È um servidor m˙ltiplo para roteamento, provendo suporte aos
+protocolos baseados em TCP/IP (inclusive IPv6) tais como RIP, OSPF,
+BGP, entre outros. Zebra transforma sua m·quina em um poderoso
+roteador.
+
+%description -l ru
+GNU Zebra - ‹‘œ ”◊œ¬œƒŒœ≈ –“œ«“¡ÕÕŒœ≈ œ¬≈”–≈ﬁ≈Œ…≈, “¡¬œ‘¡¿›≈≈ ”
+œ”Œœ◊¡ŒŒŸÕ… Œ¡ TCP/IP –“œ‘œÀœÃ¡Õ… Õ¡“€“’‘…⁄¡√…….
+
+GNU Zebra –œƒƒ≈“÷…◊¡≈‘ BGP4, BGP4+, OSPFv2, OSPFv3, RIPv1, RIPv2 …
+RIPng.
+
+%description -l uk
+GNU Zebra - √≈ ◊¶ÃÿŒ≈ –“œ«“¡ÕŒ≈ ⁄¡¬≈⁄–≈ﬁ≈ŒŒ—, ›œ –“¡√¿§ ⁄ ¬¡⁄œ◊¡Œ…Õ…
+Œ¡ TCP/IP –“œ‘œÀœÃ¡Õ… Õ¡“€“’‘…⁄¡√¶ß.
+
+GNU Zebra –¶ƒ‘“…Õ’§ BGP4, BGP4+, OSPFv2, OSPFv3, RIPv1, RIPv2 ‘¡
+RIPng.
 
 %package bgpd
 Summary:	BGP routing daemon
 Summary(pl):	Demon routingu BGP
 Group:		Networking/Daemons
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	zebra-xs26-bgpd
 
 %description bgpd
 BGP routing daemon. Includes IPv6 support.
 
-%description -l pl bgpd
+%description bgpd -l pl
 Demon obs≥ugi protoko≥u BGP. Obs≥uguje takøe IPv6.
 
 %package ospfd
@@ -86,19 +108,20 @@ Requires:	%{name} = %{version}-%{release}
 %description ospfd
 OSPF routing daemon.
 
-%description -l pl ospfd
+%description ospfd -l pl
 Demon do obs≥ugi protoko≥u OSPF.
 
 %package ospf6d
 Summary:	IPv6 OSPF routing daemon
-Summary(pl):	Demon routingu OSPF w sieciach IPv6 
+Summary(pl):	Demon routingu OSPF w sieciach IPv6
 Group:		Networking/Daemons
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	zebra-xs26-ospf6d
 
 %description ospf6d
 OSPF6 routing daemon for IPv6 networks.
 
-%description -l pl ospf6d
+%description ospf6d -l pl
 Demon obs≥ugi protoko≥u OSPF w sieciach IPv6.
 
 %package ripd
@@ -110,7 +133,7 @@ Requires:	%{name} = %{version}-%{release}
 %description ripd
 RIP routing daemon for zebra.
 
-%description -l pl ripd
+%description ripd -l pl
 Demon obs≥ugi protoko≥u RIP.
 
 %package ripngd
@@ -118,11 +141,12 @@ Summary:	IPv6 RIP routing daemon
 Summary(pl):	Demon routingu RIP w sieciach IPv6
 Group:		Networking/Daemons
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	zebra-xs26-ripngd
 
 %description ripngd
 RIP routing daemon for IPv6 networks.
 
-%description -l pl ripngd
+%description ripngd -l pl
 Demon obs≥ugi protoko≥u RIP w sieciach IPv6.
 
 %prep
@@ -130,24 +154,20 @@ Demon obs≥ugi protoko≥u RIP w sieciach IPv6.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
-%patch7 -p1
 
 %build
 rm -f ./missing
 rm -f doc/zebra.info
-aclocal
-autoconf
-automake -a -c -f
-autoheader
+%{__aclocal}
+%{__autoconf}
+%{__automake}
+%{__autoheader}
 %configure \
 	--enable-one-vty \
 	--enable-ipv6 \
 	--enable-netlink \
-	%{?_without_snmp:--disable-snmp} \
-	%{?!_without_snmp:--enable-snmp} \
+	%{?!_with_snmp:--disable-snmp} \
+	%{?_with_snmp:--enable-snmp} \
 	--enable-vtysh \
 	--with-libpam
 
@@ -181,16 +201,14 @@ install %{SOURCE25} $RPM_BUILD_ROOT/etc/sysconfig/ripngd
 
 install %{SOURCE30} $RPM_BUILD_ROOT/etc/logrotate.d/zebra
 install %{SOURCE31} $RPM_BUILD_ROOT/etc/logrotate.d/bgpd
-install %{SOURCE32} $RPM_BUILD_ROOT/etc/logrotate.d/ospf6d
-install %{SOURCE33} $RPM_BUILD_ROOT/etc/logrotate.d/ospfd
+install %{SOURCE32} $RPM_BUILD_ROOT/etc/logrotate.d/ospfd
+install %{SOURCE33} $RPM_BUILD_ROOT/etc/logrotate.d/ospf6d
 install %{SOURCE34} $RPM_BUILD_ROOT/etc/logrotate.d/ripd
 install %{SOURCE35} $RPM_BUILD_ROOT/etc/logrotate.d/ripngd
 
 touch $RPM_BUILD_ROOT/var/log/zebra/{zebra,bgpd,ospf6d,ospfd,ripd,ripngd}.log
 
 touch $RPM_BUILD_ROOT%{_sysconfdir}/{vtysh.conf,zebra.conf}
-
-gzip -9nf AUTHORS NEWS README REPORTING-BUGS SERVICES TODO
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -300,7 +318,7 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc *.gz
+%doc AUTHORS NEWS README REPORTING-BUGS SERVICES TODO
 %{_infodir}/*info*
 %{_mandir}/man1/*
 %attr(755,root,root) %{_bindir}/*

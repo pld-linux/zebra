@@ -28,15 +28,6 @@ diff -Naur zebra-0.92a/configure.in zebra-0.92a-p/configure.in
  dnl This next check looks funky due to a linker problem with some versions
  dnl of the PAM library.  Prior to 0.72 release, the Linux PAM shared library
  dnl omitted requiring libdl linking information. PAM-0.72 or better ships
-@@ -420,7 +420,7 @@
- dnl Linux IPv6
- dnl ----------
- if test "${enable_ipv6}" = "yes"; then
--   AC_EGREP_CPP(yes, [dnl
-+   AC_EGREP_CPP(yes, [
-    #include <linux/version.h>
-    /* 2.1.128 or later */
-    #if LINUX_VERSION_CODE >= 0x020180
 @@ -720,10 +720,7 @@
  dnl set paths for process id files
  dnl ------------------------------
