@@ -4,7 +4,7 @@ Summary:	Routing daemon
 Summary(pl):	Demon routingu
 Name:		zebra
 Version:	0.92a
-Release:	3.2
+Release:	4
 License:	GPL
 Group:		Networking/Daemons
 Source0:	ftp://ftp.zebra.org/pub/zebra/%{name}-%{version}.tar.gz
