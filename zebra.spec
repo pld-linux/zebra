@@ -8,12 +8,12 @@ Summary(pt_BR):	Servidor de roteamento multi-protocolo
 Summary(ru):	äÅÍÏÎ ÍÁÒÛÒÕÔÉÚÁÃÉÉ Zebra
 Summary(uk):	äÅÍÏÎ ÍÁÒÛÒÕÔÉÚÁÃ¦§ Zebra
 Name:		zebra
-Version:	0.93b
-Release:	3
+Version:	0.94
+Release:	1
 License:	GPL
 Group:		Networking/Daemons
 Source0:	ftp://ftp.zebra.org/pub/zebra/%{name}-%{version}.tar.gz
-# Source0-md5:	9ca7dc5e0afb9b6470e4b1e21c271fe1
+# Source0-md5:	ff1633f1ac026b720fa37b1856be3f48
 Source1:	%{name}.pam
 Source10:	%{name}-zebra.init
 Source11:	%{name}-bgpd.init
@@ -35,15 +35,16 @@ Source34:	%{name}-ripngd.logrotate
 Source35:	%{name}-ripd.logrotate
 Patch1:		%{name}-proc.patch
 Patch2:		%{name}-socket_paths.patch
-Patch3:		%{name}-autoconf.patch
+Patch3:		%{name}-info.patch
 Patch4:		%{name}-nolog.patch
+Patch5:		%{name}-netlink.patch
 URL:		http://www.zebra.org/
-BuildRequires:	texinfo
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.53
 BuildRequires:	automake
 BuildRequires:	readline-devel >= 4.1
 BuildRequires:	ncurses-devel >= 5.1
 BuildRequires:	pam-devel
+BuildRequires:	texinfo
 %{?_with_snmp:BuildRequires:	ucd-snmp-devel >= 4.2.6}
 PreReq:		rc-scripts
 Requires(post,preun):	/sbin/chkconfig
@@ -55,7 +56,7 @@ Obsoletes:	gated
 Obsoletes:	mrt
 Obsoletes:	zebra-xs26
 
-%define		_sysconfdir /etc/%{name}
+%define		_sysconfdir	/etc/%{name}
 
 %description
 Zebra is a multi-server routing software package which provides TCP/IP
@@ -160,15 +161,14 @@ RIP routing daemon for IPv6 networks.
 Demon obs³ugi protoko³u RIP w sieciach IPv6.
 
 %prep
-%setup  -q
+%setup -q
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 %build
-rm -f ./missing
-rm -f doc/zebra.info
 %{__aclocal}
 %{__autoconf}
 %{__automake}
@@ -186,7 +186,6 @@ rm -f doc/zebra.info
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
 install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,sysconfig,logrotate.d,pam.d} \
 	$RPM_BUILD_ROOT/var/log/{archiv,}/zebra \
 	$RPM_BUILD_ROOT/var/run/zebra
