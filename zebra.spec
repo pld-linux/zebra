@@ -1,7 +1,7 @@
 Summary:	Routing daemon
 Name:		zebra
 Version:	0.91a
-Release:	2
+Release:	3
 License:	GPL
 Group:		Networking/Daemons
 Group(de):	Netzwerkwesen/Server
@@ -27,7 +27,7 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	readline-devel >= 4.1
 BuildRequires:	ncurses-devel >= 5.1
-BuildRequires:	ucd-snmp-devel
+BuildRequires:	ucd-snmp-devel >= 4.2.1
 Prereq:		rc-scripts
 Provides:	routingdaemon
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
