@@ -1,7 +1,7 @@
 Summary:	Routing daemon
 Name:		zebra
 Version:	0.88
-Release:	1
+Release:	2
 License:	GPL
 Group:		Networking/Daemons
 Group(pl):	Sieciowe/Serwery
@@ -76,7 +76,7 @@ LDFLAGS="-s"; export LDFLAGS
 rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,sysconfig,logrotate.d} \
-	$RPM_BUILD_ROOT/var/log/zebra
+	$RPM_BUILD_ROOT/var/log/{archiv,}/zebra
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
@@ -131,6 +131,7 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %verify(not md5 size mtime) %attr(640,root,root) /etc/logrotate.d/*
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/*.conf
 %dir %attr(750,root,root) /var/log/zebra
+%dir %attr(750,root,root) /var/log/archiv/zebra
 %ghost /var/log/zebra/*
 
 %files guile
