@@ -1,13 +1,13 @@
 #!/bin/sh
 #
-# bgpd		Starts the Dynamic Route Daemon 
+# ripngd		Starts the Dynamic Route Daemon 
 #
 # chkconfig:	345 16 84
 #
 # description:	Dynamic Route Daemon for IPv4 and IPv6 routers
 #
-# processname:	bgpd
-# config:	/etc/ripngd/bgpd.conf
+# processname:	ripngd
+# config:	/etc/ripngd/ripngd.conf
 
 
 # Source function library
@@ -17,13 +17,13 @@
 . /etc/sysconfig/network
 
 # Get service config
-[ -f /etc/sysconfig/bgpd ] && . /etc/sysconfig/bgpd
+[ -f /etc/sysconfig/ripngd ] && . /etc/sysconfig/ripngd
 
 # Check that networking is up.
 if is_yes "${NETWORKING}"; then
 	if [ ! -f /var/lock/subsys/network ]; then
 		# nls "ERROR: Networking is down. %s can't be run." <service>
-		msg_network_down bgpd
+		msg_network_down ripngd
 		exit 1
 	fi
 else
@@ -34,28 +34,28 @@ fi
 case "$1" in
   start)
 	# Check if the services are already running?
-	if [ ! -f /var/lock/subsys/bgpd ]; then
-		msg_starting bgpd
-		daemon bgpd -d 
+	if [ ! -f /var/lock/subsys/ripngd ]; then
+		msg_starting ripngd
+		daemon ripngd -d 
 		RETVAL=$?
-		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/bgpd
+		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/ripngd
 	else
-		msg_already_running "bgpd"
+		msg_already_running "ripngd"
 	fi
 	;;
   stop)
         # Stop daemons.
-	if [ -f /var/lock/subsys/bgpd ]; then
- 		msg_stopping "bgpd"
-		killproc bgpd
+	if [ -f /var/lock/subsys/ripngd ]; then
+ 		msg_stopping "ripngd"
+		killproc ripngd
 		RETVAL=$?
-		rm -f /var/lock/subsys/bgpd
+		rm -f /var/lock/subsys/ripngd
 	else
-		msg_not_running bgpd
+		msg_not_running ripngd
 	fi
 	;;
   status)
-	status bgpd
+	status ripngd
 	;;
   restart|reload)
 	$0 stop
