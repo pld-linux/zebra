@@ -7,7 +7,7 @@ Summary(ru):	Демон маршрутизации Zebra
 Summary(uk):	Демон маршрутизац╕╖ Zebra
 Name:		zebra
 Version:	0.92a
-Release:	5
+Release:	6
 License:	GPL
 Group:		Networking/Daemons
 Source0:	ftp://ftp.zebra.org/pub/zebra/%{name}-%{version}.tar.gz
@@ -205,8 +205,8 @@ install %{SOURCE25} $RPM_BUILD_ROOT/etc/sysconfig/ripngd
 
 install %{SOURCE30} $RPM_BUILD_ROOT/etc/logrotate.d/zebra
 install %{SOURCE31} $RPM_BUILD_ROOT/etc/logrotate.d/bgpd
-install %{SOURCE32} $RPM_BUILD_ROOT/etc/logrotate.d/ospf6d
-install %{SOURCE33} $RPM_BUILD_ROOT/etc/logrotate.d/ospfd
+install %{SOURCE32} $RPM_BUILD_ROOT/etc/logrotate.d/ospfd
+install %{SOURCE33} $RPM_BUILD_ROOT/etc/logrotate.d/ospf6d
 install %{SOURCE34} $RPM_BUILD_ROOT/etc/logrotate.d/ripd
 install %{SOURCE35} $RPM_BUILD_ROOT/etc/logrotate.d/ripngd
 
