@@ -208,6 +208,7 @@ fi
 %config(noreplace) %verify(not md5 size mtime) /etc/pam.d/zebra
 %config(noreplace) %verify(not md5 size mtime) %attr(640,root,root) /etc/sysconfig/*
 %config(noreplace) %verify(not md5 size mtime) %attr(640,root,root) /etc/logrotate.d/*
+%dir %attr(750,root,root) %{_sysconfdir}
 %dir %attr(750,root,root) /var/run/zebra
 %dir %attr(750,root,root) /var/log/zebra
 %dir %attr(750,root,root) /var/log/archiv/zebra
