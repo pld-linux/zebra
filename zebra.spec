@@ -14,7 +14,7 @@ Source5:	zebra-ripd.conf
 Source6:	zebra-ripngd.conf
 Source7:	zebra.init
 Source8:	zebra.sysconfig
-Source9:	zebra.log
+Source9:	zebra.logrotate
 Patch0:		zebra-info.patch
 URL:		http://www.zebra.org/
 BuildRequires:	texinfo
