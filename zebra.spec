@@ -25,6 +25,7 @@ BuildRequires:	readline-devel
 BuildRequires:	ncurses-devel
 Prereq:		/sbin/install-info
 Prereq:		/sbin/chkconfig
+Requires:	rc-scripts
 BuildRoot:	/tmp/%{name}-%{version}-root
 
 %define		_sysconfdir /etc/%{name}
