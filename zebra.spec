@@ -7,8 +7,6 @@ Version:	0.92a
 Release:	2
 License:	GPL
 Group:		Networking/Daemons
-Group(de):	Netzwerkwesen/Server
-Group(pl):	Sieciowe/Serwery
 Source0:	ftp://ftp.zebra.org/pub/zebra/%{name}-%{version}.tar.gz
 Source1:	%{name}-%{name}.init
 Source2:	%{name}-bgpd.init
