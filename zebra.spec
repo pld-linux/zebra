@@ -227,7 +227,7 @@ rm -rf $RPM_BUILD_ROOT
 /sbin/chkconfig --add zebra >&2
 umask 027
 if [ ! -s %{_sysconfdir}/zebra.conf ]; then
-        echo "hostname `hostname`" > %{_sysconfdir}/zebra.conf
+	echo "hostname `hostname`" > %{_sysconfdir}/zebra.conf
 fi
 if [ -f /var/lock/subsys/zebra ]; then
 	/etc/rc.d/init.d/zebra restart >&2
@@ -280,7 +280,7 @@ if [ "$1" = "0" ]; then
 	if [ -f /var/lock/subsys/zebra ]; then
 		/etc/rc.d/init.d/zebra stop >&2
 	fi
-        /sbin/chkconfig --del zebra >&2
+	/sbin/chkconfig --del zebra >&2
 fi
 
 %preun bgpd
@@ -288,7 +288,7 @@ if [ "$1" = "0" ]; then
 	if [ -f /var/lock/subsys/bgpd ]; then
 		/etc/rc.d/init.d/bgpd stop >&2
 	fi
-        /sbin/chkconfig --del bgpd >&2
+	/sbin/chkconfig --del bgpd >&2
 fi
 
 %preun ospfd
@@ -296,7 +296,7 @@ if [ "$1" = "0" ]; then
 	if [ -f /var/lock/subsys/ospfd ]; then
 		/etc/rc.d/init.d/ospfd stop >&2
 	fi
-        /sbin/chkconfig --del ospfd >&2
+	/sbin/chkconfig --del ospfd >&2
 fi
 
 %preun ospf6d
@@ -304,7 +304,7 @@ if [ "$1" = "0" ]; then
 	if [ -f /var/lock/subsys/ospf6d ]; then
 		/etc/rc.d/init.d/ospf6d stop >&2
 	fi
-        /sbin/chkconfig --del ospf6d >&2
+	/sbin/chkconfig --del ospf6d >&2
 fi
 
 %preun ripd
@@ -312,7 +312,7 @@ if [ "$1" = "0" ]; then
 	if [ -f /var/lock/subsys/ripd ]; then
 		/etc/rc.d/init.d/ripd stop >&2
 	fi
-        /sbin/chkconfig --del ripd >&2
+	/sbin/chkconfig --del ripd >&2
 fi
 
 %preun ripngd
@@ -320,7 +320,7 @@ if [ "$1" = "0" ]; then
 	if [ -f /var/lock/subsys/ripngd ]; then
 		/etc/rc.d/init.d/ripngd stop >&2
 	fi
-        /sbin/chkconfig --del ripngd >&2
+	/sbin/chkconfig --del ripngd >&2
 fi
 
 %postun
