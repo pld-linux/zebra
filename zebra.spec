@@ -15,6 +15,7 @@ Source6:	zebra-ripngd.conf
 Source7:	zebra.init
 Source8:	zebra.sysconfig
 Source9:	zebra.log
+Patch:		zebra-info.patch
 URL:		http://www.zebra.org/
 BuildPrereq:	texinfo
 BuildPrereq:	info
@@ -30,11 +31,13 @@ BuildRoot:	/tmp/%{name}-%{version}-root
 %define		_sysconfdir /etc/%{name}
 
 %description
-Routing daemon with IPv6 support.
+Zebra is a multi-server routing software package which provides TCP/IP based
+routing protocols also with IPv6 support such as RIP, OSPF, BGP and so on.
+Zebra turns your machine into a full powered router.
 
 %description -l pl
 Program do dynamicznego ustawiania tablicy tras.
-Mo¿e tak¿e ustalaæ trasy dla IPv6
+Mo¿e tak¿e ustalaæ trasy dla IPv6.
 
 %package guile
 Summary:	Guile interface for zebra routing daemon
@@ -51,6 +54,14 @@ Guile dla programu zebra.
 
 %prep
 %setup -q
+%patch -p1
+
+if [ -d /proc/sys/net/ipv6 ]; then
+	echo "Yor system support ipv6"
+else
+	echo "Yor system not support ipv6"
+	exit 1
+fi
 
 %build
 #autoconf
