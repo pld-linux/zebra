@@ -1,7 +1,7 @@
 Summary:	Routing daemon
 Name:		zebra
 Version:	0.90
-Release:	2
+Release:	3
 License:	GPL
 Group:		Networking/Daemons
 Group(de):	Netzwerkwesen/Server
@@ -124,7 +124,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(754,root,root) /etc/rc.d/init.d/*
 %config(noreplace) %verify(not md5 size mtime) %attr(640,root,root) /etc/sysconfig/*
 %config(noreplace) %verify(not md5 size mtime) %attr(640,root,root) /etc/logrotate.d/*
-%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/*.conf
+%config(noreplace) %verify(not size mtime md5) %attr(640,root,root) %{_sysconfdir}/*.conf
 %dir %attr(750,root,root) /var/run/zebra
 %dir %attr(750,root,root) /var/log/zebra
 %dir %attr(750,root,root) /var/log/archiv/zebra
