@@ -31,12 +31,12 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 Zebra is a multi-server routing software package which provides TCP/IP
-based routing protocols also with IPv6 support such as RIP, OSPF, BGP and
-so on. Zebra turns your machine into a full powered router.
+based routing protocols also with IPv6 support such as RIP, OSPF, BGP
+and so on. Zebra turns your machine into a full powered router.
 
 %description -l pl
-Program do dynamicznego ustawiania tablicy tras. Mo¿e tak¿e ustalaæ trasy
-dla IPv6.
+Program do dynamicznego ustawiania tablicy tras. Mo¿e tak¿e ustalaæ
+trasy dla IPv6.
 
 %package guile
 Summary:	Guile interface for zebra routing daemon
