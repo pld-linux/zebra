@@ -1,7 +1,7 @@
 Summary:	Routing daemon
 Name:		zebra
-Version:	0.89a
-Release:	2
+Version:	0.90
+Release:	1
 License:	GPL
 Group:		Networking/Daemons
 Group(de):	Netzwerkwesen/Server
@@ -21,14 +21,12 @@ Patch1:		%{name}-proc.patch
 URL:		http://www.zebra.org/
 BuildRequires:	texinfo
 BuildRequires:	autoconf
-%{!?guile:BuildRequires:	guile-devel >= 1.4}
 BuildRequires:	readline-devel >= 4.1
 BuildRequires:	ncurses-devel >= 5.1
 BuildRequires:	ucd-snmp-devel
 Prereq:		rc-scripts
 Provides:	routingdaemon
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-%{!?guile:Obsoletes:	zebra-guile}
 Obsoletes:	bird
 Obsoletes:	gated
 Obsoletes:	mrt
@@ -44,20 +42,6 @@ and so on. Zebra turns your machine into a full powered router.
 Program do dynamicznego ustawiania tablicy tras. Mo¿e tak¿e ustalaæ
 trasy dla IPv6.
 
-%package guile
-Summary:	Guile interface for zebra routing daemon
-Summary:	Guile dla programu zebra
-Group:		Networking/Daemons
-Group(de):	Netzwerkwesen/Server
-Group(pl):	Sieciowe/Serwery
-Requires:	%{name} = %{version}
-
-%description
-Guile interface for zebra routing daemon.
-
-%description guile -l pl
-Guile dla programu zebra.
-
 %prep
 %setup  -q
 %patch0 -p1
@@ -70,10 +54,9 @@ autoconf
 %configure \
 	--enable-one-vty \
 	--enable-ipv6 \
-%{!?guile:	--disable-guile} \
-%{?guile:	--enable-guile} \
 	--enable-netlink \
-	--enable-snmp
+	--enable-snmp \
+	--enable-vtysh
 
 %{__make}
 
@@ -129,7 +112,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc *.gz tools/*
 %{_infodir}/*info*
+%{_mandir}/man*/*
 %attr(755,root,root) %{_sbindir}/*
+%attr(755,root,root) %{_bindir}/*
 %attr(754,root,root) /etc/rc.d/init.d/*
 %config(noreplace) %verify(not md5 size mtime) %attr(640,root,root) /etc/sysconfig/*
 %config(noreplace) %verify(not md5 size mtime) %attr(640,root,root) /etc/logrotate.d/*
@@ -137,7 +122,3 @@ rm -rf $RPM_BUILD_ROOT
 %dir %attr(750,root,root) /var/log/zebra
 %dir %attr(750,root,root) /var/log/archiv/zebra
 %ghost /var/log/zebra/*
-
-%{?guile:%files guile}
-%{?guile:%defattr(644,root,root,755)}
-%{?guile:%attr(755,root,root) %{_bindir}/*}
