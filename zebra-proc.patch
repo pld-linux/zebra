@@ -1,0 +1,75 @@
+Patch hardcoding configure's guesses about /proc filesystem
+It is needed as some files in /proc may be not available for user compiling
+package, and /proc on runtime may differ from /proc on compile-time
+
+diff -durN zebra-0.86.orig/configure.in zebra-0.86/configure.in
+--- zebra-0.86.orig/configure.in	Fri Mar 10 10:13:06 2000
++++ zebra-0.86/configure.in	Mon Jun 12 14:22:38 2000
+@@ -246,24 +246,7 @@
+ dnl ------------------------------
+ dnl check kernel route read method
+ dnl ------------------------------
+-AC_CACHE_CHECK(route read method check, zebra_rtread,
+-[if test "$netlink" = yes; then
+-  RTREAD_METHOD="rtread_netlink.o"
+-  zebra_rtread="netlink"
+-else
+-for zebra_rtread in /proc/net/route /dev/ip /dev/null;
+-do
+-  test x`ls $zebra_rtread 2>/dev/null` = x"$zebra_rtread" && break
+-done
+-case $zebra_rtread in
+-  "/proc/net/route") RTREAD_METHOD="rtread_proc.o"
+-                     zebra_rtread="proc";;
+-  "/dev/ip")         RTREAD_METHOD="rtread_getmsg.o"
+-                     zebra_rtread="getmsg";;
+-  *)                 RTREAD_METHOD="rtread_sysctl.o"
+-                     zebra_rtread="sysctl";;
+-esac
+-fi])
++RTREAD_METHOD="rtread_netlink.o"
+ AC_SUBST(RTREAD_METHOD)
+ 
+ dnl -----------------------------
+@@ -293,36 +276,16 @@
+ dnl -----------------------
+ dnl check proc file system.
+ dnl -----------------------
+-AC_CHECK_FILE(/proc/net/dev,
+- [AC_DEFINE(HAVE_PROC_NET_DEV)
+-  IF_PROC=if_proc.o])
+-
+-AC_CHECK_FILE(/proc/net/if_inet6,
+- [AC_DEFINE(HAVE_PROC_NET_IF_INET6)
+-  IF_PROC=if_proc.o])
++AC_DEFINE(HAVE_PROC_NET_DEV)
++IF_PROC=if_proc.o
++AC_DEFINE(HAVE_PROC_NET_IF_INET6)
++IF_PROC=if_proc.o
+ AC_SUBST(IF_PROC)
+ 
+ dnl -----------------------------
+ dnl check ipforward detect method
+ dnl -----------------------------
+-AC_CACHE_CHECK(ipforward method check, zebra_ipforward_path,
+-[for zebra_ipforward_path in /proc/net/snmp /dev/ip /dev/null;
+-do
+-  test x`ls $zebra_ipforward_path 2>/dev/null` = x"$zebra_ipforward_path" && break
+-done
+-case $zebra_ipforward_path in
+-  "/proc/net/snmp")  IPFORWARD=ipforward_proc.o
+-                     zebra_ipforward_path="proc";;
+-  "/dev/ip")         
+-                     case "$host" in
+-                       *-nec-sysv4*)  IPFORWARD=ipforward_ews.o
+-                                      zebra_ipforward_path="ews";;
+-                       *)             IPFORWARD=ipforward_solaris.o
+-                                      zebra_ipforward_path="solaris";;
+-                     esac;;
+-  *)                 IPFORWARD=ipforward_sysctl.o
+-                     zebra_ipforward_path="sysctl";;
+-esac])
++IPFORWARD=ipforward_proc.o
+ AC_SUBST(IPFORWARD)
+ 
+ AC_CHECK_FUNCS(getaddrinfo, [have_getaddrinfo=yes], [have_getaddrinfo=no])
