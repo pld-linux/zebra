@@ -1,24 +1,19 @@
 # Customized setings for zebra
 
-# Nice level for zebra daemon [-10 - +10]
-ZEBRA_NICE="+2"
+# Nice level for routing daemon [-10 - +10]
+SERVICE_RUN_NICE_LEVEL="+2"
 
 # Run BGP deamon ? [yes, no]
 RUN_BGPD="no"
-BGPD_NICE="+2"
 
 # Run OSPF for IPv6 daemon ? [yes, no]
 RUN_OSPF6D="no"
-OSPF6D_NICE="+2"
 
 # Run OPDF daemon ? [yes, no]
 RUN_OSPFD="no"
-OSPFD_NICE="+2"
 
 # Run RIP daemon ? [yes, no]
 RUN_RIP="no"
-RIP_NICE="+2"
 
 # Run RIPng daemon ? [yes, no]
 RUN_RIPNGD="no"
-RIPNGD_NICE="+2"

@@ -27,26 +27,26 @@ export PATH=/bin:/sbin:/usr/bin:/usr/sbin
 case "$1" in
   start)
 	show "Starting Route Daemon"
-	daemon ${ZEBRA_NICE} zebra -d 
+	daemon ${SERVICE_RUN_NICE_LEVEL} zebra -d 
 	if [ "${RUN_BGPD}" = "yes" ] || [ "${RUN_BGPD}" = "YES" ]; then
 		show "Starting BGP Daemon"
-		daemon ${BGPD_NICE} bgpd -d
+		daemon ${SERVICE_RUN_NICE_LEVEL} bgpd -d
 	fi
 	if [ "${RUN_OSPF6D}" = "yes" ] || [ "${RUN_SPF6D}" = "YES" ]; then
 		show "Starting OSPF for IPv6 Daemon"
-		daemon ${OSPF6D_NICE} ospf6d -d
+		daemon ${SERVICE_RUN_NICE_LEVEL} ospf6d -d
 	fi
 	if [ "${RUN_OSPFD}" = "yes" ] || [ "${RUN_OSPFD}" = "YES" ]; then
 		show "Starting OSPF Daemon"
-		daemon ${OSPFD_NICE} ospfd -d
+		daemon ${SERVICE_RUN_NICE_LEVEL} ospfd -d
 	fi
 	if [ "${RUN_RIP}" = "yes" ] || [ "${RUN_RIP}" = "YES" ]; then
 		show "Starting RIP Daemon"
-		daemon ${RIP_NICE} ripd -d
+		daemon ${SERVICE_RUN_NICE_LEVEL} ripd -d
 	fi
 	if [ "${RUN_RIPNGD}" = "yes" ] || [ "${RUN_RIPNGD}" = "YES" ]; then
 		show "Starting RIPng Daemon"
-		daemon ${RIPNGD_NICE} bgpd -d
+		daemon ${SERVICE_RUN_NICE_LEVEL} bgpd -d
 	fi
 	touch /var/lock/subsys/zebra
 	;;
