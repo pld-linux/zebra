@@ -1,6 +1,6 @@
 Summary:	Routing daemon
 Name:		zebra
-Version:	0.89
+Version:	0.89a
 Release:	1
 License:	GPL
 Group:		Networking/Daemons
@@ -22,13 +22,14 @@ URL:		http://www.zebra.org/
 BuildRequires:	texinfo
 BuildRequires:	info
 BuildRequires:	autoconf
-BuildRequires:	guile-devel >= 1.4
+%{!?guile:BuildRequires:	guile-devel >= 1.4}
 BuildRequires:	readline-devel >= 4.1
 BuildRequires:	ncurses-devel >= 5.1
 BuildRequires:	ucd-snmp-devel
 Prereq:		/sbin/chkconfig
 Requires:	rc-scripts
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+%{!?guile:Obsoletes:	zebra-guile}
 
 %define		_sysconfdir /etc/%{name}
 
@@ -67,7 +68,8 @@ autoconf
 %configure \
 	--enable-one-vty \
 	--enable-ipv6 \
-	--enable-guile \
+%{!?guile:	--disable-guile} \
+%{?guile:	--enable-guile} \
 	--enable-netlink \
 	--enable-snmp
 
@@ -134,6 +136,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %attr(750,root,root) /var/log/archiv/zebra
 %ghost /var/log/zebra/*
 
-%files guile
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/*
+%{?guile:%files guile}
+%{?guile:%defattr(644,root,root,755)}
+%{?guile:%attr(755,root,root) %{_bindir}/*}
