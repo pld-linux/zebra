@@ -1,15 +1,14 @@
-diff -durN zebra-0.90.orig/bgpd/bgpd.h zebra-0.90/bgpd/bgpd.h
---- zebra-0.90.orig/bgpd/bgpd.h	Wed Jan 10 01:57:11 2001
-+++ zebra-0.90/bgpd/bgpd.h	Wed Feb  7 12:39:47 2001
-@@ -503,7 +503,7 @@
- /* Default port values. */
- #define BGP_PORT_DEFAULT   179
- #define BGP_VTY_PORT      2605
--#define BGP_VTYSH_PATH    "/tmp/.bgpd"
-+#define BGP_VTYSH_PATH    "/var/run/zebra/bgpd"
+--- zebra-0.92/bgpd/bgpd.h.orig	Tue Aug 14 20:31:43 2001
++++ zebra-0.92/bgpd/bgpd.h	Thu Aug 16 00:12:44 2001
+@@ -547,7 +547,7 @@
  
- /* Default configuration file name for bgpd. */
- #define BGP_DEFAULT_CONFIG "bgpd.conf"
+ /* Default configuration file name for bgpd.  */
+ #define BGP_VTY_PORT                    2605
+-#define BGP_VTYSH_PATH          "/tmp/.bgpd"
++#define BGP_VTYSH_PATH          "/var/run/zebra/bgpd"
+ #define BGP_DEFAULT_CONFIG       "bgpd.conf"
+ 
+ /* Check AS path loop when we send NLRI.  */
 diff -durN zebra-0.90.orig/ospf6d/ospf6d.h zebra-0.90/ospf6d/ospf6d.h
 --- zebra-0.90.orig/ospf6d/ospf6d.h	Tue Jan  9 23:37:16 2001
 +++ zebra-0.90/ospf6d/ospf6d.h	Wed Feb  7 12:40:31 2001
