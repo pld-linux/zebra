@@ -1,0 +1,73 @@
+#!/bin/sh
+#
+# ripd		Starts the Dynamic Route Daemon 
+#
+# chkconfig:	345 16 84
+#
+# description:	Dynamic Route Daemon for IPv4 and IPv6 routers
+#
+# processname:	ripd
+# config:	/etc/zebra/ripd.conf
+
+
+# Source function library
+. /etc/rc.d/init.d/functions
+
+# Get network config
+. /etc/sysconfig/network
+
+# Get service config
+[ -f /etc/sysconfig/ripd ] && . /etc/sysconfig/bgpd
+
+# Check that networking is up.
+if is_yes "${NETWORKING}"; then
+	if [ ! -f /var/lock/subsys/network ]; then
+		# nls "ERROR: Networking is down. %s can't be run." <service>
+		msg_network_down ripd
+		exit 1
+	fi
+else
+	exit 0
+fi
+									    
+# Sanity checks.
+[ -f /etc/zebra/ripd.conf ] || exit 0
+
+
+# See how we were called.
+case "$1" in
+  start)
+	# Check if the services are already running?
+	if [ ! -f /var/lock/subsys/ripd ]; then
+		msg_starting ripd
+		daemon ripd -d 
+		RETVAL=$?
+		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/ripd
+	else
+		msg_already_running "ripd"
+	fi
+	;;
+  stop)
+        # Stop daemons.
+	if [ -f /var/lock/subsys/ripd ]; then
+ 		msg_stopping "ripd"
+		killproc ripd
+		RETVAL=$?
+		rm -f /var/lock/subsys/ripd
+	else
+		msg_not_running ripd
+	fi
+	;;
+  status)
+	status ripd
+	;;
+  restart|reload)
+	$0 stop
+	$0 start
+	;;
+  *)
+	msg_usage "$0 {start|stop|status|restart|reload}"
+	exit 1
+esac
+
+exit 0
