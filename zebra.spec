@@ -1,7 +1,7 @@
 Summary:	Routing daemon
 Name:		zebra
 Version:	0.90
-Release:	1
+Release:	2
 License:	GPL
 Group:		Networking/Daemons
 Group(de):	Netzwerkwesen/Server
@@ -13,11 +13,14 @@ Source3:	%{name}-ospf6d.conf
 Source4:	%{name}-ospfd.conf
 Source5:	%{name}-ripd.conf
 Source6:	%{name}-ripngd.conf
-Source7:	%{name}.init
-Source8:	%{name}.sysconfig
-Source9:	%{name}.logrotate
+Source7:	Zebra.conf
+Source8:	vtysh.conf
+Source9:	%{name}.init
+Source10:	%{name}.sysconfig
+Source11:	%{name}.logrotate
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-proc.patch
+Patch2:		%{name}-socket_paths.patch
 URL:		http://www.zebra.org/
 BuildRequires:	texinfo
 BuildRequires:	autoconf
@@ -46,10 +49,11 @@ trasy dla IPv6.
 %setup  -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 aclocal
-automake
+automake -i
 autoconf
 %configure \
 	--enable-one-vty \
@@ -64,7 +68,8 @@ autoconf
 rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,sysconfig,logrotate.d} \
-	$RPM_BUILD_ROOT/var/log/{archiv,}/zebra
+	$RPM_BUILD_ROOT/var/log/{archiv,}/zebra \
+	$RPM_BUILD_ROOT/var/run/zebra 
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
@@ -75,13 +80,14 @@ install %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/ospf6d.conf
 install %{SOURCE4} $RPM_BUILD_ROOT%{_sysconfdir}/ospfd.conf
 install %{SOURCE5} $RPM_BUILD_ROOT%{_sysconfdir}/ripd.conf
 install %{SOURCE6} $RPM_BUILD_ROOT%{_sysconfdir}/ripngd.conf
-install %{SOURCE7} $RPM_BUILD_ROOT/etc/rc.d/init.d/zebra
-install %{SOURCE8} $RPM_BUILD_ROOT/etc/sysconfig/zebra
-install %{SOURCE9} $RPM_BUILD_ROOT/etc/logrotate.d/zebra
+install %{SOURCE7} $RPM_BUILD_ROOT%{_sysconfdir}/Zebra.conf
+install %{SOURCE8} $RPM_BUILD_ROOT%{_sysconfdir}/vtysh.conf
+install %{SOURCE9} $RPM_BUILD_ROOT/etc/rc.d/init.d/zebra
+install %{SOURCE10} $RPM_BUILD_ROOT/etc/sysconfig/zebra
+install %{SOURCE11} $RPM_BUILD_ROOT/etc/logrotate.d/zebra
 
 touch $RPM_BUILD_ROOT/var/log/zebra/{zebra,bgpd,ospf6d,ospfd,ripd,ripngd}.log
 
-gzip -9nf README AUTHORS NEWS ChangeLog tools/*
 
 %post
 [ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
@@ -110,7 +116,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc *.gz tools/*
+%doc README AUTHORS NEWS ChangeLog tools/*
 %{_infodir}/*info*
 %{_mandir}/man*/*
 %attr(755,root,root) %{_sbindir}/*
@@ -119,6 +125,7 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %verify(not md5 size mtime) %attr(640,root,root) /etc/sysconfig/*
 %config(noreplace) %verify(not md5 size mtime) %attr(640,root,root) /etc/logrotate.d/*
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/*.conf
+%dir %attr(750,root,root) /var/run/zebra
 %dir %attr(750,root,root) /var/log/zebra
 %dir %attr(750,root,root) /var/log/archiv/zebra
 %ghost /var/log/zebra/*
