@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 #
 # zebra:         Starts the Dynamic Route Daemon 
 #
