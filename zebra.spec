@@ -13,6 +13,7 @@ Release:	3
 License:	GPL
 Group:		Networking/Daemons
 Source0:	ftp://ftp.zebra.org/pub/zebra/%{name}-%{version}.tar.gz
+# Source0-md5:	9ca7dc5e0afb9b6470e4b1e21c271fe1
 Source1:	%{name}.pam
 Source10:	%{name}-zebra.init
 Source11:	%{name}-bgpd.init
