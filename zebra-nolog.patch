@@ -1,0 +1,11 @@
+--- zebra-0.93a/zebra/rt_netlink.c~	Sat Jul  6 09:37:00 2002
++++ zebra-0.93a/zebra/rt_netlink.c	Sun Dec 22 01:47:09 2002
+@@ -979,7 +979,7 @@
+ static int
+ netlink_talk_filter (struct sockaddr_nl *snl, struct nlmsghdr *h)
+ {
+-  zlog_warn ("netlink_talk: ignoring message type 0x%04x", h->nlmsg_type);
++/*  zlog_warn ("netlink_talk: ignoring message type 0x%04x", h->nlmsg_type);*/
+   return 0;
+ }
+ 
