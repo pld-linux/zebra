@@ -80,7 +80,7 @@ rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,sysconfig,logrotate.d,pam.d} \
 	$RPM_BUILD_ROOT/var/log/{archiv,}/zebra \
-	$RPM_BUILD_ROOT/var/run/zebra 
+	$RPM_BUILD_ROOT/var/run/zebra
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
@@ -157,7 +157,7 @@ if [ -f /var/lock/subsys/ripngd ]; then
 	/etc/rc.d/init.d/ripngd restart >&2
 else
 	echo "Run '/etc/rc.d/init.d/ripngd start' to start ripngd routing deamon." >&2
-fi    
+fi
 
 %preun
 if [ "$1" = "0" ]; then
