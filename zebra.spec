@@ -1,7 +1,7 @@
 Summary:	Routing daemon
 Name:		zebra
 Version:	0.89a
-Release:	1
+Release:	2
 License:	GPL
 Group:		Networking/Daemons
 Group(de):	Netzwerkwesen/Server
@@ -20,16 +20,18 @@ Patch0:		%{name}-info.patch
 Patch1:		%{name}-proc.patch
 URL:		http://www.zebra.org/
 BuildRequires:	texinfo
-BuildRequires:	info
 BuildRequires:	autoconf
 %{!?guile:BuildRequires:	guile-devel >= 1.4}
 BuildRequires:	readline-devel >= 4.1
 BuildRequires:	ncurses-devel >= 5.1
 BuildRequires:	ucd-snmp-devel
-Prereq:		/sbin/chkconfig
-Requires:	rc-scripts
+Prereq:		rc-scripts
+Provides:	routingdaemon
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %{!?guile:Obsoletes:	zebra-guile}
+Obsoletes:	bird
+Obsoletes:	gated
+Obsoletes:	mrt
 
 %define		_sysconfdir /etc/%{name}
 
