@@ -1,15 +1,15 @@
-diff -ru zebra-0.78c.old/doc/zebra.texi zebra-0.78c/doc/zebra.texi
---- zebra-0.78c.old/doc/zebra.texi	Wed Sep  1 13:19:05 1999
-+++ zebra-0.78c/doc/zebra.texi	Wed Sep  1 14:55:46 1999
-@@ -24,9 +24,9 @@
+diff -Nru zebra-0.83/doc/zebra.texi zebra-0.83.new/doc/zebra.texi
+--- zebra-0.83/doc/zebra.texi	Sat Nov  6 19:08:00 1999
++++ zebra-0.83.new/doc/zebra.texi	Fri Dec 10 19:58:28 1999
+@@ -16,9 +16,9 @@
+ @set INSTALL_PREFIX_SBIN /usr/local/sbin/
  
- 
- @c A - Enter the file into the top level info dir
+ @c Info entry
 -@dircategory Routing Software
-+@dircategory Net utilities:
++@dircategory Routing Software:
  @direntry
 -* Zebra: (zebra).		The GNU Zebra routing software package.
 +* Zebra: (zebra).			The GNU Zebra routing software package
  @end direntry
  
- 
+ @ifinfo
