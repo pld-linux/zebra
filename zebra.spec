@@ -33,11 +33,10 @@ Source32:	%{name}-ospfd.logrotate
 Source33:	%{name}-ospf6d.logrotate
 Source34:	%{name}-ripngd.logrotate
 Source35:	%{name}-ripd.logrotate
-Patch1:		%{name}-proc.patch
-Patch2:		%{name}-socket_paths.patch
-Patch3:		%{name}-info.patch
-Patch4:		%{name}-nolog.patch
-Patch5:		%{name}-netlink.patch
+Patch0:		%{name}-proc.patch
+Patch1:		%{name}-socket_paths.patch
+Patch2:		%{name}-info.patch
+Patch3:		%{name}-nolog.patch
 URL:		http://www.zebra.org/
 BuildRequires:	autoconf >= 2.53
 BuildRequires:	automake
@@ -162,11 +161,10 @@ Demon obs³ugi protoko³u RIP w sieciach IPv6.
 
 %prep
 %setup -q
+%patch0 -p1
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
-%patch4 -p1
-%patch5 -p1
 
 %build
 %{__aclocal}
