@@ -1,6 +1,6 @@
 Summary:	Routing daemon
 Name:		zebra
-Version:	0.85
+Version:	0.86
 Release:	1
 License:	GPL
 Group:		Networking/Daemons
@@ -16,6 +16,7 @@ Source7:	zebra.init
 Source8:	zebra.sysconfig
 Source9:	zebra.logrotate
 Patch0:		zebra-info.patch
+Patch1:		zebra-proc.patch
 URL:		http://www.zebra.org/
 BuildRequires:	texinfo
 BuildRequires:	info
@@ -23,6 +24,7 @@ BuildRequires:	autoconf
 BuildRequires:	guile-devel
 BuildRequires:	readline-devel
 BuildRequires:	ncurses-devel
+BuildRequires:	ucd-snmp-devel
 Prereq:		/sbin/chkconfig
 Requires:	rc-scripts
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -54,14 +56,18 @@ Guile dla programu zebra.
 %prep
 %setup  -q
 #%patch0 -p1
+%patch1 -p1
 
 %build
+aclocal
+automake
 autoconf
 LDFLAGS="-s"; export LDFLAGS 
 %configure \
 	--enable-one-vty \
 	--enable-ipv6 \
 	--enable-guile \
+	--enable-netlink \
 	--disable-snmp
 
 %{__make}
