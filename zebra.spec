@@ -163,8 +163,8 @@ Demon obs³ugi protoko³u RIP w sieciach IPv6.
 rm -f ./missing
 rm -f doc/zebra.info
 aclocal
-autoconf
-automake -a -c -f
+%{__autoconf}
+%{__automake}
 autoheader
 %configure \
 	--enable-one-vty \
