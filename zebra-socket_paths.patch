@@ -1,0 +1,96 @@
+diff -durN zebra-0.90.orig/bgpd/bgpd.h zebra-0.90/bgpd/bgpd.h
+--- zebra-0.90.orig/bgpd/bgpd.h	Wed Jan 10 01:57:11 2001
++++ zebra-0.90/bgpd/bgpd.h	Wed Feb  7 12:39:47 2001
+@@ -503,7 +503,7 @@
+ /* Default port values. */
+ #define BGP_PORT_DEFAULT   179
+ #define BGP_VTY_PORT      2605
+-#define BGP_VTYSH_PATH    "/tmp/.bgpd"
++#define BGP_VTYSH_PATH    "/var/run/zebra/bgpd"
+ 
+ /* Default configuration file name for bgpd. */
+ #define BGP_DEFAULT_CONFIG "bgpd.conf"
+diff -durN zebra-0.90.orig/ospf6d/ospf6d.h zebra-0.90/ospf6d/ospf6d.h
+--- zebra-0.90.orig/ospf6d/ospf6d.h	Tue Jan  9 23:37:16 2001
++++ zebra-0.90/ospf6d/ospf6d.h	Wed Feb  7 12:40:31 2001
+@@ -88,7 +88,7 @@
+ 
+ /* Default port values. */
+ #define OSPF6_VTY_PORT             2606
+-#define OSPF6_VTYSH_PATH           "/tmp/.ospf6d"
++#define OSPF6_VTYSH_PATH           "/var/run/zebra/ospf6d"
+ 
+ #ifdef INRIA_IPV6
+ #ifndef IPV6_PKTINFO
+diff -durN zebra-0.90.orig/ospfd/ospfd.h zebra-0.90/ospfd/ospfd.h
+--- zebra-0.90.orig/ospfd/ospfd.h	Tue Jan  9 21:41:37 2001
++++ zebra-0.90/ospfd/ospfd.h	Wed Feb  7 12:41:24 2001
+@@ -34,7 +34,7 @@
+ 
+ /* VTY port number. */
+ #define OSPF_VTY_PORT          2604
+-#define OSPF_VTYSH_PATH        "/tmp/.ospfd"
++#define OSPF_VTYSH_PATH        "/var/run/zebra/ospfd"
+ 
+ /* IP TTL for OSPF protocol. */
+ #define OSPF_IP_TTL             1
+diff -durN zebra-0.90.orig/ripd/ripd.h zebra-0.90/ripd/ripd.h
+--- zebra-0.90.orig/ripd/ripd.h	Mon Jan  1 16:26:31 2001
++++ zebra-0.90/ripd/ripd.h	Wed Feb  7 12:42:45 2001
+@@ -66,7 +66,7 @@
+ /* RIP port number. */
+ #define RIP_PORT_DEFAULT               520
+ #define RIP_VTY_PORT                  2602
+-#define RIP_VTYSH_PATH        "/tmp/.ripd"
++#define RIP_VTYSH_PATH        "/var/run/zebra/ripd"
+ 
+ /* Default configuration file name. */
+ #define RIPD_DEFAULT_CONFIG    "ripd.conf"
+diff -durN zebra-0.90.orig/ripngd/ripngd.h zebra-0.90/ripngd/ripngd.h
+--- zebra-0.90.orig/ripngd/ripngd.h	Mon Jan  1 16:26:47 2001
++++ zebra-0.90/ripngd/ripngd.h	Wed Feb  7 12:43:26 2001
+@@ -27,7 +27,7 @@
+ #define RIPNG_V1                         1
+ #define RIPNG_PORT_DEFAULT             521
+ #define RIPNG_VTY_PORT                2603
+-#define RIPNG_VTYSH_PATH              "/tmp/.ripngd"
++#define RIPNG_VTYSH_PATH              "/var/run/zebra/ripngd"
+ #define RIPNG_MAX_PACKET_SIZE         1500
+ #define RIPNG_PRIORITY_DEFAULT           0
+ 
+diff -durN zebra-0.90.orig/vtysh/vtysh.h zebra-0.90/vtysh/vtysh.h
+--- zebra-0.90.orig/vtysh/vtysh.h	Sun Jan  7 17:42:26 2001
++++ zebra-0.90/vtysh/vtysh.h	Wed Feb  7 12:46:21 2001
+@@ -40,12 +40,12 @@
+ #define VTYSH_INDEX_MAX   6
+ 
+ /* UNIX domain socket path. */
+-#define ZEBRA_PATH "/tmp/.zebra"
+-#define RIP_PATH "/tmp/.ripd"
+-#define RIPNG_PATH "/tmp/.ripngd"
+-#define OSPF_PATH "/tmp/.ospfd"
+-#define OSPF6_PATH "/tmp/.ospf6d"
+-#define BGP_PATH "/tmp/.bgpd"
++#define ZEBRA_PATH "/var/run/zebra/zebra"
++#define RIP_PATH "/var/run/zebra/ripd"
++#define RIPNG_PATH "/var/run/zebra/ripngd"
++#define OSPF_PATH "/var/run/zebra/ospfd"
++#define OSPF6_PATH "/var/run/zebra/ospf6d"
++#define BGP_PATH "/var/run/zebra/bgpd"
+ 
+ /* vtysh local configuration file. */
+ #define VTYSH_DEFAULT_CONFIG "vtysh.conf"
+diff -durN zebra-0.90.orig/zebra/zserv.h zebra-0.90/zebra/zserv.h
+--- zebra-0.90.orig/zebra/zserv.h	Mon Jan  1 16:28:32 2001
++++ zebra-0.90/zebra/zserv.h	Wed Feb  7 12:44:28 2001
+@@ -25,8 +25,8 @@
+ /* Default port information. */
+ #define ZEBRA_PORT                    2600
+ #define ZEBRA_VTY_PORT                2601
+-#define ZEBRA_VTYSH_PATH              "/tmp/.zebra"
+-#define ZEBRA_SERV_PATH               "/tmp/.zserv"
++#define ZEBRA_VTYSH_PATH              "/var/run/zebra/zebra"
++#define ZEBRA_SERV_PATH               "/var/run/zebra/zserv"
+ 
+ /* Default configuration filename. */
+ #define DEFAULT_CONFIG_FILE "zebra.conf"
