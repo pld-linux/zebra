@@ -4,7 +4,7 @@ Summary:	Routing daemon
 Summary(pl):	Demon routingu
 Name:		zebra
 Version:	0.92a
-Release:	1
+Release:	2
 License:	GPL
 Group:		Networking/Daemons
 Group(de):	Netzwerkwesen/Server
@@ -32,7 +32,7 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	readline-devel >= 4.1
 BuildRequires:	ncurses-devel >= 5.1
-%{?!_without_snmp:BuildRequires:	ucd-snmp-devel >= 4.2.2}
+%{?!_without_snmp:BuildRequires:	ucd-snmp-devel >= 4.2.3}
 Prereq:		rc-scripts
 Prereq:		/sbin/chkconfig
 Provides:	routingdaemon
