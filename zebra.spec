@@ -1,6 +1,6 @@
 Summary:	Routing daemon
 Name:		zebra
-Version:	0.78c
+Version:	0.78h
 Release:	1
 Copyright:	GPL
 Group:		Networking/Daemons
