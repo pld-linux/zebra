@@ -26,7 +26,7 @@ BuildRequires:	ncurses-devel
 Prereq:		/usr/sbin/fix-info-dir
 Prereq:		/sbin/chkconfig
 Requires:	rc-scripts
-BuildRoot:	/tmp/%{name}-%{version}-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sysconfdir /etc/%{name}
 
