@@ -1,0 +1,6 @@
+/var/log/zebra/*.log {
+	olddir /var/log/archiv/zebra
+	postrotate
+		/bin/killall -USR1 ospf6d >/dev/null 2>&1
+	endscript
+}
