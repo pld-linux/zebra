@@ -93,15 +93,26 @@ install %{SOURCE11} $RPM_BUILD_ROOT/etc/logrotate.d/zebra
 touch $RPM_BUILD_ROOT/var/log/zebra/{zebra,bgpd,ospf6d,ospfd,ripd,ripngd}.log
 
 %post
-%fix_info_dir
+[ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
+/sbin/chkconfig --add zebra >&2
 touch $RPM_BUILD_ROOT/var/log/zebra/{zebra,bgpd,ospf6d,ospfd,ripd,ripngd}.log
-DESC="routing daemon"; %chkconfig_add	
+
+if [ -f /var/lock/subsys/zebra ]; then
+	/etc/rc.d/init.d/zebra restart >&2
+else
+	echo "Run '/etc/rc.d/init.d/zebra start' to start routing deamon." >&2
+fi
     
 %preun
-%chkconfig_del
+if [ "$1" = "0" ]; then
+	if [ -f /var/lock/subsys/zebra ]; then
+		/etc/rc.d/init.d/zebra stop >&2
+	fi
+        /sbin/chkconfig --del zebra >&2
+fi
 
 %postun
-%fix_info_dir
+[ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 
 %clean
 rm -rf $RPM_BUILD_ROOT
