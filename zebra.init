@@ -1,52 +1,61 @@
 #!/bin/sh
 #
-# zebra:         Starts the Dynamic Route Daemon 
+# zebra		Starts the Dynamic Route Daemon 
 #
-# chkconfig: 345 80 45
-# description: Dynamic Route Daemon for IPv4 and IPv6 routers
+# chkconfig:	345 80 45
 #
-# processname: zebra
-# config: /etc/zebra/zebra.conf
+# description:	Dynamic Route Daemon for IPv4 and IPv6 routers
 #
-export PATH=/bin:/sbin:/usr/bin:/usr/sbin
+# processname:	zebra
+# config:	/etc/zebra/zebra.conf
 
-# Sanity checks.
-[ -f /etc/zebra/zebra.conf ] || exit 0
-[ -x /usr/sbin/zebra ] || exit 0
 
-# Source function library.
+# Source function library
 . /etc/rc.d/init.d/functions
 
-# Customised setings
+# Get network config
+. /etc/sysconfig/network
+
+# Get service config
 [ -f /etc/sysconfig/zebra ] && . /etc/sysconfig/zebra
 
 # Check that networking is up.
-[ "${NETWORKING}" = "no" ] && exit 0
+[ "${NETWORKING}" = "no" ] && echo "Error: Networking is down"; exit 0
+
+# Sanity checks.
+[ -f /etc/zebra/zebra.conf ] || exit 0
+
 
 # See how we were called.
 case "$1" in
   start)
-	show "Starting Route Daemon"
-	daemon ${SERVICE_RUN_NICE_LEVEL} zebra -d 
-	if [ "${RUN_BGPD}" = "yes" ] || [ "${RUN_BGPD}" = "YES" ]; then
+	# Check if the services are already running?
+	if [ ! -f /var/lock/subsys/zebra ]; then
+		show "Starting Route Daemons"
+		daemon ${SERVICE_RUN_NICE_LEVEL} zebra -d 
+		if [ "${RUN_BGPD}" = "yes" ] || [ "${RUN_BGPD}" = "YES" ]; then
+
 		show "Starting BGP Daemon"
 		daemon ${SERVICE_RUN_NICE_LEVEL} bgpd -d
-	fi
-	if [ "${RUN_OSPF6D}" = "yes" ] || [ "${RUN_SPF6D}" = "YES" ]; then
-		show "Starting OSPF for IPv6 Daemon"
-		daemon ${SERVICE_RUN_NICE_LEVEL} ospf6d -d
-	fi
-	if [ "${RUN_OSPFD}" = "yes" ] || [ "${RUN_OSPFD}" = "YES" ]; then
-		show "Starting OSPF Daemon"
-		daemon ${SERVICE_RUN_NICE_LEVEL} ospfd -d
-	fi
-	if [ "${RUN_RIP}" = "yes" ] || [ "${RUN_RIP}" = "YES" ]; then
-		show "Starting RIP Daemon"
-		daemon ${SERVICE_RUN_NICE_LEVEL} ripd -d
-	fi
-	if [ "${RUN_RIPNGD}" = "yes" ] || [ "${RUN_RIPNGD}" = "YES" ]; then
-		show "Starting RIPng Daemon"
-		daemon ${SERVICE_RUN_NICE_LEVEL} bgpd -d
+		fi
+		if [ "${RUN_OSPF6D}" = "yes" ] || [ "${RUN_SPF6D}" = "YES" ]; then
+			show "Starting OSPF for IPv6 Daemon"
+			daemon ${SERVICE_RUN_NICE_LEVEL} ospf6d -d
+		fi
+		if [ "${RUN_OSPFD}" = "yes" ] || [ "${RUN_OSPFD}" = "YES" ]; then
+			show "Starting OSPF Daemon"
+			daemon ${SERVICE_RUN_NICE_LEVEL} ospfd -d
+		fi
+		if [ "${RUN_RIP}" = "yes" ] || [ "${RUN_RIP}" = "YES" ]; then
+			show "Starting RIP Daemon"
+			daemon ${SERVICE_RUN_NICE_LEVEL} ripd -d
+		fi
+		if [ "${RUN_RIPNGD}" = "yes" ] || [ "${RUN_RIPNGD}" = "YES" ]; then
+			show "Starting RIPng Daemon"
+			daemon ${SERVICE_RUN_NICE_LEVEL} bgpd -d
+		fi
+	else
+		echo "Route Daemons already are running"
 	fi
 	touch /var/lock/subsys/zebra
 	;;
@@ -84,12 +93,12 @@ case "$1" in
 	status ripd
 	status ripngd
 	;;
-  restart)
+  restart|reload)
 	$0 stop
 	$0 start
 	;;
   *)
-	echo "Usage: $0 {start|stop|status|restart}"
+	echo "Usage: $0 {start|stop|status|restart|reload}"
 	exit 1
 esac
 
