@@ -1,3 +1,5 @@
+#
+# _without_snmp - without SNMP support (problematic with IPv6)
 Summary:	Routing daemon
 Name:		zebra
 Version:	0.91a
@@ -27,7 +29,7 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	readline-devel >= 4.1
 BuildRequires:	ncurses-devel >= 5.1
-BuildRequires:	ucd-snmp-devel >= 4.2.1
+%{?!_without_snmp:BuildRequires:	ucd-snmp-devel >= 4.2.1}
 Prereq:		rc-scripts
 Provides:	routingdaemon
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -60,7 +62,8 @@ automake -a -c
 	--enable-one-vty \
 	--enable-ipv6 \
 	--enable-netlink \
-	--enable-snmp \
+	%{?_without_snmp:--disable-snmp} \
+	%{?!_without_snmp:--enable-snmp} \
 	--enable-vtysh
 
 %{__make}
