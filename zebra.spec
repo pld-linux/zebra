@@ -1,8 +1,8 @@
 Summary:	Routing daemon
 Name:		zebra
 Version:	0.84a
-Release:	1
-Copyright:	GPL
+Release:	2
+License:	GPL
 Group:		Networking/Daemons
 Group(pl):	Sieciowe/Serwery
 Source0:	ftp://ftp.zebra.org/pub/zebra/%{name}-%{version}.tar.gz
@@ -31,19 +31,19 @@ BuildRoot:	/tmp/%{name}-%{version}-root
 %define		_sysconfdir /etc/%{name}
 
 %description
-Zebra is a multi-server routing software package which provides TCP/IP based
-routing protocols also with IPv6 support such as RIP, OSPF, BGP and so on.
-Zebra turns your machine into a full powered router.
+Zebra is a multi-server routing software package which provides TCP/IP
+based routing protocols also with IPv6 support such as RIP, OSPF, BGP and
+so on. Zebra turns your machine into a full powered router.
 
 %description -l pl
-Program do dynamicznego ustawiania tablicy tras.
-Mo¿e tak¿e ustalaæ trasy dla IPv6.
+Program do dynamicznego ustawiania tablicy tras. Mo¿e tak¿e ustalaæ trasy
+dla IPv6.
 
 %package guile
 Summary:	Guile interface for zebra routing daemon
 Summary:	Guile dla programu zebra
-Group:          Networking/Daemons
-Group(pl):      Sieciowe/Serwery
+Group:		Networking/Daemons
+Group(pl):	Sieciowe/Serwery
 Requires:	%{name} = %{version}
 
 %description
