@@ -1,6 +1,6 @@
 Summary:	Routing daemon
 Name:		zebra
-Version:	0.67
+Version:	0.69
 Release:	1
 Copyright:	GPL
 Group:		Networking/Daemons
@@ -116,11 +116,11 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc *.gz tools/*
-%{_infodir}/*
+%{_infodir}/*info*
 %attr(755,root,root) %{_sbindir}/*
 %attr(754,root,root) /etc/rc.d/init.d/*
-%attr(640,root,root) /etc/sysconfig/*
-%attr(640,root,root) /etc/logrotate.d/*
+%config(noreplace) %verify(not md5 size mtime) %attr(640,root,root) /etc/sysconfig/*
+%config(noreplace) %verify(not md5 size mtime) %attr(640,root,root) /etc/logrotate.d/*
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/*.conf
 %doc %{_sysconfdir}/*.sample
 
