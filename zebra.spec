@@ -66,8 +66,7 @@ fi
 %build
 #autoconf
 LDFLAGS="-s"; export LDFLAGS 
-%configure #\
-#	--enable-guile
+%configure --enable-guile
 
 make
 
