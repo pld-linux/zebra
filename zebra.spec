@@ -214,8 +214,6 @@ touch $RPM_BUILD_ROOT/var/log/zebra/{zebra,bgpd,ospf6d,ospfd,ripd,ripngd}.log
 
 touch $RPM_BUILD_ROOT%{_sysconfdir}/{vtysh.conf,zebra.conf}
 
-gzip -9nf AUTHORS NEWS README REPORTING-BUGS SERVICES TODO
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -324,7 +322,7 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc *.gz
+%doc AUTHORS NEWS README REPORTING-BUGS SERVICES TODO
 %{_infodir}/*info*
 %{_mandir}/man1/*
 %attr(755,root,root) %{_bindir}/*
