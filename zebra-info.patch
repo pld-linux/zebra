@@ -1,0 +1,15 @@
+diff -Nru zebra-0.67/doc/zebra.texi zebra-0.67.new/doc/zebra.texi
+--- zebra-0.67/doc/zebra.texi	Sun May 30 16:48:07 1999
++++ zebra-0.67.new/doc/zebra.texi	Sat Jun 19 12:39:20 1999
+@@ -4,9 +4,9 @@
+ @settitle Zebra
+ @c %**end of header
+ 
+-@dircategory Routing Software
++@dircategory Net utilities:
+ @direntry
+-* Zebra: (zebra).		The GNU Zebra routing software package.
++* Zebra: (zebra)			The GNU Zebra routing software package
+ @end direntry
+ 
+ @titlepage
