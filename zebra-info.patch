@@ -1,14 +1,10 @@
-diff -Nru zebra-0.89/doc/zebra.texi zebra-0.89.new/doc/zebra.texi
---- zebra-0.89/doc/zebra.texi	Fri Jul  7 00:04:16 2000
-+++ zebra-0.89.new/doc/zebra.texi	Wed Oct  4 05:37:49 2000
-@@ -16,9 +16,9 @@
- @set INSTALL_PREFIX_SBIN /usr/local/sbin
- 
+--- zebra-0.92/doc/zebra.texi.orig	Thu Feb  8 02:32:50 2001
++++ zebra-0.92/doc/zebra.texi	Wed Aug 15 22:11:15 2001
+@@ -18,7 +18,7 @@
  @c Info entry
--@dircategory Routing Software
-+@dircategory Routing Software:
+ @dircategory Routing Software:
  @direntry
--* Zebra: (zebra).		The @sc{gnu} Zebra routing software.
+-* Zebra: (zebra).		The @sc{gnu} Zebra routing software
 +* Zebra: (zebra).			The @sc{gnu} Zebra routing software
  @end direntry
  
