@@ -1,4 +1,5 @@
-/var/log/zebra/*.log {
+/var/log/zebra/ripd.log {
+	missingok
 	olddir /var/log/archiv/zebra
 	postrotate
 		/bin/killall -USR1 ripd >/dev/null 2>&1
