@@ -1,6 +1,6 @@
 Summary:	Routing daemon
 Name:		zebra
-Version:	0.65
+Version:	0.66
 Release:	1
 Copyright:	GPL
 Group:		Networking/Daemons
@@ -125,4 +125,4 @@ rm -rf $RPM_BUILD_ROOT
 %changelog
 * Sun May 16 1999 Artur Frysiak <wiget@pld.org.pl>
   [19990516-1]
-- initial version  
+- initial version.
