@@ -1,7 +1,7 @@
 Summary:	Routing daemon
 Name:		zebra
-Version:	0.80
-Release:	4
+Version:	0.81
+Release:	1
 Copyright:	GPL
 Group:		Networking/Daemons
 Group(pl):	Sieciowe/Serwery
@@ -53,7 +53,7 @@ Guile interface for zebra routing daemon.
 Guile dla programu zebra.
 
 %prep
-%setup  -q -n %{name}-%{version}
+%setup  -q
 %patch0 -p1
 
 %build
@@ -61,8 +61,9 @@ autoconf
 LDFLAGS="-s"; export LDFLAGS 
 %configure \
 	--enable-one-vty \
-	--enable-ipv6A\
-	--enable-guile
+	--enable-ipv6 \
+	--enable-guile \
+	--disable-snmp
 
 make
 
