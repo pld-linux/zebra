@@ -5,7 +5,7 @@ Release:	0.1
 Copyright:	GPL
 Group:		Networking/Daemons
 Group(pl):	Sieciowe/Serwery
-Source0:	ftp://ftp.zebra.org/%{name}-%{version}.tar.gz
+Source0:	ftp://ftp.zebra.org/pub/zebra/%{name}-%{version}.tar.gz
 Source1:	zebra.conf
 Source2:	zebra-bgpd.conf
 Source3:	zebra-ospf6d.conf
