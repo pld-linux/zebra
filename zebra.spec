@@ -4,7 +4,7 @@ Summary:	Routing daemon
 Summary(pl):	Demon routingu
 Name:		zebra
 Version:	0.92a
-Release:	3.1
+Release:	3.2
 License:	GPL
 Group:		Networking/Daemons
 Source0:	ftp://ftp.zebra.org/pub/zebra/%{name}-%{version}.tar.gz
@@ -32,6 +32,8 @@ Patch2:		%{name}-socket_paths.patch
 Patch3:		%{name}-autoconf.patch
 Patch4:		%{name}-automake.patch
 Patch5:		%{name}-autoheader.patch
+Patch6:		%{name}-bgpd-timer.patch
+Patch7:		%{name}-bgpd-nexthop.patch
 URL:		http://www.zebra.org/
 BuildRequires:	texinfo
 BuildRequires:	autoconf
@@ -130,6 +132,8 @@ Demon obs³ugi protoko³u RIP w sieciach IPv6.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1
+%patch7 -p1
 
 %build
 rm -f ./missing
