@@ -2,7 +2,9 @@
 # _without_snmp - without SNMP support (problematic with IPv6?)
 Summary:	Routing daemon
 Summary(pl):	Demon routingu
-Summary(pt_BR): Servidor de roteamento multi-protocolo
+Summary(pt_BR):	Servidor de roteamento multi-protocolo
+Summary(ru):	Демон маршрутизации Zebra
+Summary(uk):	Демон маршрутизац╕╖ Zebra
 Name:		zebra
 Version:	0.92a
 Release:	4
@@ -64,13 +66,28 @@ Daemons for each routing protocols are available in separate packages.
 Program do dynamicznego ustawiania tablicy tras. Mo©e tak©e ustalaФ
 trasy dla IPv6.
 
-Demony obsЁuguj╠ce poszczegСlne protokoЁy dostЙpne s╠ w osobnych pakietach.
+Demony obsЁuguj╠ce poszczegСlne protokoЁy dostЙpne s╠ w osobnych
+pakietach.
 
 %description -l pt_BR
 Zebra И um servidor mЗltiplo para roteamento, provendo suporte aos
 protocolos baseados em TCP/IP (inclusive IPv6) tais como RIP, OSPF,
 BGP, entre outros. Zebra transforma sua mАquina em um poderoso
 roteador.
+
+%description -l ru
+GNU Zebra - это свободное программное обеспечение, работающее с
+основанными на TCP/IP протоколами маршрутизации.
+
+GNU Zebra поддерживает BGP4, BGP4+, OSPFv2, OSPFv3, RIPv1, RIPv2 и
+RIPng.
+
+%description -l uk
+GNU Zebra - це в╕льне програмне забезпечення, що працю╓ з базованими
+на TCP/IP протоколами маршрутизац╕╖.
+
+GNU Zebra п╕дтриму╓ BGP4, BGP4+, OSPFv2, OSPFv3, RIPv1, RIPv2 та
+RIPng.
 
 %package bgpd
 Summary:	BGP routing daemon
@@ -81,7 +98,7 @@ Requires:	%{name} = %{version}-%{release}
 %description bgpd
 BGP routing daemon. Includes IPv6 support.
 
-%description -l pl bgpd
+%description bgpd -l pl
 Demon obsЁugi protokoЁu BGP. ObsЁuguje tak©e IPv6.
 
 %package ospfd
@@ -93,19 +110,19 @@ Requires:	%{name} = %{version}-%{release}
 %description ospfd
 OSPF routing daemon.
 
-%description -l pl ospfd
+%description ospfd -l pl
 Demon do obsЁugi protokoЁu OSPF.
 
 %package ospf6d
 Summary:	IPv6 OSPF routing daemon
-Summary(pl):	Demon routingu OSPF w sieciach IPv6 
+Summary(pl):	Demon routingu OSPF w sieciach IPv6
 Group:		Networking/Daemons
 Requires:	%{name} = %{version}-%{release}
 
 %description ospf6d
 OSPF6 routing daemon for IPv6 networks.
 
-%description -l pl ospf6d
+%description ospf6d -l pl
 Demon obsЁugi protokoЁu OSPF w sieciach IPv6.
 
 %package ripd
@@ -117,7 +134,7 @@ Requires:	%{name} = %{version}-%{release}
 %description ripd
 RIP routing daemon for zebra.
 
-%description -l pl ripd
+%description ripd -l pl
 Demon obsЁugi protokoЁu RIP.
 
 %package ripngd
@@ -129,7 +146,7 @@ Requires:	%{name} = %{version}-%{release}
 %description ripngd
 RIP routing daemon for IPv6 networks.
 
-%description -l pl ripngd
+%description ripngd -l pl
 Demon obsЁugi protokoЁu RIP w sieciach IPv6.
 
 %prep
