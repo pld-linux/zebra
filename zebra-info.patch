@@ -1,10 +1,10 @@
-diff -Nru zebra-0.67/doc/zebra.texi zebra-0.67.new/doc/zebra.texi
---- zebra-0.67/doc/zebra.texi	Sun May 30 16:48:07 1999
-+++ zebra-0.67.new/doc/zebra.texi	Sat Jun 19 12:39:20 1999
-@@ -4,9 +4,9 @@
- @settitle Zebra
- @c %**end of header
+diff -ru zebra-0.78c.old/doc/zebra.texi zebra-0.78c/doc/zebra.texi
+--- zebra-0.78c.old/doc/zebra.texi	Wed Sep  1 13:19:05 1999
++++ zebra-0.78c/doc/zebra.texi	Wed Sep  1 14:55:46 1999
+@@ -24,9 +24,9 @@
  
+ 
+ @c A - Enter the file into the top level info dir
 -@dircategory Routing Software
 +@dircategory Net utilities:
  @direntry
@@ -12,4 +12,17 @@ diff -Nru zebra-0.67/doc/zebra.texi zebra-0.67.new/doc/zebra.texi
 +* Zebra: (zebra)			The GNU Zebra routing software package
  @end direntry
  
- @titlepage
+ 
+Only in zebra-0.78c/doc: zebra.texi~
+diff -ru zebra-0.78c.old/guile/Makefile.in zebra-0.78c/guile/Makefile.in
+--- zebra-0.78c.old/guile/Makefile.in	Tue Aug 31 16:04:10 1999
++++ zebra-0.78c/guile/Makefile.in	Tue Aug 31 16:04:10 1999
+@@ -120,7 +120,7 @@
+ .SUFFIXES:
+ .SUFFIXES: .S .c .o .s
+ $(srcdir)/Makefile.in: Makefile.am $(top_srcdir)/configure.in $(ACLOCAL_M4) 
+-	cd %htop_srcdir) && $(AUTOMAKE) --gnu --include-deps guile/Makefile
++	cd $(top_srcdir) && $(AUTOMAKE) --gnu --include-deps guile/Makefile
+ 
+ Makefile: $(srcdir)/Makefile.in  $(top_builddir)/config.status
+ 	cd $(top_builddir) \
