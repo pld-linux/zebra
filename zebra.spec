@@ -1,6 +1,6 @@
 Summary:	Routing daemon
 Name:		zebra
-Version:	0.66
+Version:	0.67
 Release:	1
 Copyright:	GPL
 Group:		Networking/Daemons
@@ -53,14 +53,9 @@ Guile dla programu zebra.
 %setup -q
 
 %build
-autoconf
-CFLAGS="$RPM_OPT_FLAGS" \
-LDFLAGS="-s" \
-./configure \
-	--target=%{_target_platform} \
-	--host=%{_host} \
-	--prefix=%{_prefix} \
-	--sysconfdir=%{_sysconfdir} \
+#autoconf
+LDFLAGS="-s"; export LDFLAGS 
+%configure \
 	--enable-guile
 
 make
@@ -108,13 +103,13 @@ fi
 rm -rf $RPM_BUILD_ROOT
 
 %files
-%defattr(640,root,root,755)
-%attr(644,root,root) %doc *.gz tools/*
-%attr(644,root,root) %{_infodir}/*
+%defattr(644,root,root,755)
+%doc *.gz tools/*
+%{_infodir}/*
 %attr(755,root,root) %{_sbindir}/*
 %attr(755,root,root) /etc/rc.d/init.d/*
-/etc/sysconfig/*
-/etc/logrotate.d/*
+%attr(640,root,root) /etc/sysconfig/*
+%attr(640,root,root) /etc/logrotate.d/*
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/*.conf
 %doc %{_sysconfdir}/*.sample
 
