@@ -2,6 +2,7 @@
 # _without_snmp - without SNMP support (problematic with IPv6?)
 Summary:	Routing daemon
 Summary(pl):	Demon routingu
+Summary(pt_BR): Servidor de roteamento multi-protocolo
 Name:		zebra
 Version:	0.92a
 Release:	4
@@ -64,6 +65,12 @@ Program do dynamicznego ustawiania tablicy tras. Mo¿e tak¿e ustalaæ
 trasy dla IPv6.
 
 Demony obs³uguj±ce poszczególne protoko³y dostêpne s± w osobnych pakietach.
+
+%description -l pt_BR
+Zebra é um servidor múltiplo para roteamento, provendo suporte aos
+protocolos baseados em TCP/IP (inclusive IPv6) tais como RIP, OSPF,
+BGP, entre outros. Zebra transforma sua máquina em um poderoso
+roteador.
 
 %package bgpd
 Summary:	BGP routing daemon
