@@ -23,7 +23,6 @@ BuildRequires:	autoconf
 BuildRequires:	guile-devel
 BuildRequires:	readline-devel
 BuildRequires:	ncurses-devel
-Prereq:		/usr/sbin/fix-info-dir
 Prereq:		/sbin/chkconfig
 Requires:	rc-scripts
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -92,7 +91,7 @@ gzip -9nf README AUTHORS NEWS ChangeLog tools/* \
 	$RPM_BUILD_ROOT%{_infodir}/* 
 
 %post
-/usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
+[ -x /usr/sbin/fix-info-dir ] && /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 /sbin/chkconfig --add zebra >&2
 touch $RPM_BUILD_ROOT/var/log/zebra/{zebra,bgpd,ospf6d,ospfd,ripd,ripngd}.log
 
@@ -111,7 +110,7 @@ if [ "$1" = "0" ]; then
 fi
 
 %postun
-/usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
+[ -x /usr/sbin/fix-info-dir ] && /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 
 %clean
 rm -rf $RPM_BUILD_ROOT
