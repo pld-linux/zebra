@@ -1,0 +1,96 @@
+#!/bin/bash
+#
+# zebra:         Starts the Dynamic Route Daemon 
+#
+# chkconfig: 345 80 45
+# description: Dynamic Route Daemon for IPv4 and IPv6 routers
+#
+# processname: zebra
+# config: /etc/zebra/zebra.conf
+#
+export PATH=/bin:/sbin:/usr/bin:/usr/sbin
+
+# Sanity checks.
+[ -f /etc/zebra/zebra.conf ] || exit 0
+[ -x /usr/sbin/zebra ] || exit 0
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+# Customised setings
+[ -f /etc/sysconfig/zebra ] && . /etc/sysconfig/zebra
+
+# Check that networking is up.
+[ "${NETWORKING}" = "no" ] && exit 0
+
+# See how we were called.
+case "$1" in
+  start)
+	show "Starting Route Daemon"
+	daemon ${ZEBRA_NICE} zebra -d 
+	if [ "${RUN_BGPD}" = "yes" ] || [ "${RUN_BGPD}" = "YES" ]; then
+		show "Starting BGP Daemon"
+		daemon ${BGPD_NICE} bgpd -d
+	fi
+	if [ "${RUN_OSPF6D}" = "yes" ] || [ "${RUN_SPF6D}" = "YES" ]; then
+		show "Starting OSPF for IPv6 Daemon"
+		daemon ${OSPF6D_NICE} ospf6d -d
+	fi
+	if [ "${RUN_OSPFD}" = "yes" ] || [ "${RUN_OSPFD}" = "YES" ]; then
+		show "Starting OSPF Daemon"
+		daemon ${OSPFD_NICE} ospfd -d
+	fi
+	if [ "${RUN_RIP}" = "yes" ] || [ "${RUN_RIP}" = "YES" ]; then
+		show "Starting RIP Daemon"
+		daemon ${RIP_NICE} ripd -d
+	fi
+	if [ "${RUN_RIPNGD}" = "yes" ] || [ "${RUN_RIPNGD}" = "YES" ]; then
+		show "Starting RIPng Daemon"
+		daemon ${RIPNGD_NICE} bgpd -d
+	fi
+	touch /var/lock/subsys/zebra
+	;;
+  stop)
+	show "Stopping Route Daemon: "
+	killproc zebra
+        if [ "${RUN_BGPD}" = "yes" ] || [ "${RUN_BGPD}" = "YES" ]; then
+                show "Stopping BGP Daemon"
+                killproc bgpd
+        fi
+        if [ "${RUN_OSPF6D}" = "yes" ] || [ "${RUN_SPF6D}" = "YES" ]; then
+                show "Stopping OSPF for IPv6 Daemon"
+                killproc ospf6d
+        fi
+        if [ "${RUN_OSPFD}" = "yes" ] || [ "${RUN_OSPFD}" = "YES" ]; then
+                show "Stopping OSPF Daemon"
+                killproc ospfd
+        fi
+        if [ "${RUN_RIP}" = "yes" ] || [ "${RUN_RIP}" = "YES" ]; then
+                show "Stopping RIP Daemon"
+                killproc ripd
+        fi
+        if [ "${RUN_RIPNGD}" = "yes" ] || [ "${RUN_RIPNGD}" = "YES" ]; then
+                show "Stopping RIPng Daemon"
+                killproc bgpd
+        fi
+	
+	rm -f /var/lock/subsys/mrtd
+	;;
+  status)
+	status mrtd
+	status bgpd
+	status ospf6d
+	status ospfd
+	status ripd
+	status ripngd
+	;;
+  restart)
+	$0 stop
+	$0 start
+	;;
+  *)
+	echo "Usage: $0 {start|stop|status|restart}"
+	exit 1
+esac
+
+exit 0
