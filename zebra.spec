@@ -7,7 +7,7 @@ Summary(ru):	Демон маршрутизации Zebra
 Summary(uk):	Демон маршрутизац╕╖ Zebra
 Name:		zebra
 Version:	0.93a
-Release:	2
+Release:	3
 License:	GPL
 Group:		Networking/Daemons
 Source0:	ftp://ftp.zebra.org/pub/zebra/%{name}-%{version}.tar.gz
@@ -33,6 +33,7 @@ Source35:	%{name}-ripd.logrotate
 Patch1:		%{name}-proc.patch
 Patch2:		%{name}-socket_paths.patch
 Patch3:		%{name}-autoconf.patch
+Patch4:		%{name}-nolog.patch
 URL:		http://www.zebra.org/
 BuildRequires:	texinfo
 BuildRequires:	autoconf
@@ -154,6 +155,7 @@ Demon obsЁugi protokoЁu RIP w sieciach IPv6.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 rm -f ./missing
