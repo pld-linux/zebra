@@ -1,5 +1,7 @@
 #
+# Conditional build:
 # _with_snmp - with SNMP support (broken?)
+#
 Summary:	Routing daemon
 Summary(pl):	Demon routingu
 Summary(pt_BR):	Servidor de roteamento multi-protocolo
@@ -42,8 +44,9 @@ BuildRequires:	readline-devel >= 4.1
 BuildRequires:	ncurses-devel >= 5.1
 BuildRequires:	pam-devel
 %{?_with_snmp:BuildRequires:	ucd-snmp-devel >= 4.2.6}
-Prereq:		rc-scripts
-Prereq:		/sbin/chkconfig
+PreReq:		rc-scripts
+Requires(post,preun):	/sbin/chkconfig
+Requires(post):	/bin/hostname
 Provides:	routingdaemon
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	bird
@@ -91,6 +94,7 @@ RIPng.
 Summary:	BGP routing daemon
 Summary(pl):	Demon routingu BGP
 Group:		Networking/Daemons
+Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name} = %{version}-%{release}
 Obsoletes:	zebra-xs26-bgpd
 
@@ -104,6 +108,7 @@ Demon obs³ugi protoko³u BGP. Obs³uguje tak¿e IPv6.
 Summary:	OSPF routing daemon
 Summary(pl):	Demon routingu OSPF
 Group:		Networking/Daemons
+Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name} = %{version}-%{release}
 
 %description ospfd
@@ -117,6 +122,7 @@ Summary:	IPv6 OSPF routing daemon
 Summary(pl):	Demon routingu OSPF w sieciach IPv6
 Group:		Networking/Daemons
 Requires:	%{name} = %{version}-%{release}
+Requires(post,preun):	/sbin/chkconfig
 Obsoletes:	zebra-xs26-ospf6d
 
 %description ospf6d
@@ -129,6 +135,7 @@ Demon obs³ugi protoko³u OSPF w sieciach IPv6.
 Summary:	RIP routing daemon
 Summary(pl):	Demon routingu RIP
 Group:		Networking/Daemons
+Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name} = %{version}-%{release}
 
 %description ripd
@@ -142,6 +149,7 @@ Summary:	IPv6 RIP routing daemon
 Summary(pl):	Demon routingu RIP w sieciach IPv6
 Group:		Networking/Daemons
 Requires:	%{name} = %{version}-%{release}
+Requires(post,preun):	/sbin/chkconfig
 Obsoletes:	zebra-xs26-ripngd
 
 %description ripngd
@@ -218,6 +226,7 @@ rm -rf $RPM_BUILD_ROOT
 %post
 [ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 /sbin/chkconfig --add zebra >&2
+umask 027
 if [ ! -s %{_sysconfdir}/zebra.conf ]; then
         echo "hostname `hostname`" > %{_sysconfdir}/zebra.conf
 fi
@@ -235,20 +244,20 @@ else
 	echo "Run '/etc/rc.d/init.d/bgpd start' to start bgpd routing deamon." >&2
 fi
 
-%post ospf6d
-/sbin/chkconfig --add ospf6d >&2
-if [ -f /var/lock/subsys/ospf6d ]; then
-	/etc/rc.d/init.d/ospf6d restart >&2
-else
-	echo "Run '/etc/rc.d/init.d/ospf6d start' to start ospf6d routing deamon." >&2
-fi
-
 %post ospfd
 /sbin/chkconfig --add ospfd >&2
 if [ -f /var/lock/subsys/ospfd ]; then
 	/etc/rc.d/init.d/ospfd restart >&2
 else
 	echo "Run '/etc/rc.d/init.d/ospfd start' to start ospfd routing deamon." >&2
+fi
+
+%post ospf6d
+/sbin/chkconfig --add ospf6d >&2
+if [ -f /var/lock/subsys/ospf6d ]; then
+	/etc/rc.d/init.d/ospf6d restart >&2
+else
+	echo "Run '/etc/rc.d/init.d/ospf6d start' to start ospf6d routing deamon." >&2
 fi
 
 %post ripd
@@ -283,20 +292,20 @@ if [ "$1" = "0" ]; then
         /sbin/chkconfig --del bgpd >&2
 fi
 
-%preun ospf6d
-if [ "$1" = "0" ]; then
-	if [ -f /var/lock/subsys/ospf6d ]; then
-		/etc/rc.d/init.d/ospf6d stop >&2
-	fi
-        /sbin/chkconfig --del ospf6d >&2
-fi
-
 %preun ospfd
 if [ "$1" = "0" ]; then
 	if [ -f /var/lock/subsys/ospfd ]; then
 		/etc/rc.d/init.d/ospfd stop >&2
 	fi
         /sbin/chkconfig --del ospfd >&2
+fi
+
+%preun ospf6d
+if [ "$1" = "0" ]; then
+	if [ -f /var/lock/subsys/ospf6d ]; then
+		/etc/rc.d/init.d/ospf6d stop >&2
+	fi
+        /sbin/chkconfig --del ospf6d >&2
 fi
 
 %preun ripd
