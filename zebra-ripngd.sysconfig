@@ -1,0 +1,7 @@
+# Customized setings for zebra ripngd
+
+# Nice level for routing daemon [-10 - +10]
+SERVICE_RUN_NICE_LEVEL="+2"
+
+# When program terminates, retain added route by zebra.
+#RETAIN_ROUTES=yes
