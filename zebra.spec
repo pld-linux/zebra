@@ -1,6 +1,6 @@
 #
 # Conditional build:
-# _with_snmp - with SNMP support (broken?)
+%bcond_with	snmp	# with SNMP support (broken?)
 #
 Summary:	Routing daemon
 Summary(pl):	Demon routingu
@@ -44,7 +44,7 @@ BuildRequires:	readline-devel >= 4.1
 BuildRequires:	ncurses-devel >= 5.1
 BuildRequires:	pam-devel
 BuildRequires:	texinfo
-%{?_with_snmp:BuildRequires:	ucd-snmp-devel >= 4.2.6}
+%{?with_snmp:BuildRequires:	ucd-snmp-devel >= 4.2.6}
 PreReq:		rc-scripts
 Requires(post,preun):	/sbin/chkconfig
 Requires(post):	/bin/hostname
@@ -175,8 +175,8 @@ Demon obs³ugi protoko³u RIP w sieciach IPv6.
 	--enable-one-vty \
 	--enable-ipv6 \
 	--enable-netlink \
-	%{?!_with_snmp:--disable-snmp} \
-	%{?_with_snmp:--enable-snmp} \
+	%{!?with_snmp:--disable-snmp} \
+	%{?with_snmp:--enable-snmp} \
 	--enable-vtysh \
 	--with-libpam
 
