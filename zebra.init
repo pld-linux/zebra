@@ -55,7 +55,7 @@ case "$1" in
 		fi
 		if [ "${RUN_RIPNGD}" = "yes" ] || [ "${RUN_RIPNGD}" = "YES" ]; then
 			show "Starting RIPng Daemon"
-			daemon ${SERVICE_RUN_NICE_LEVEL} bgpd -d
+			daemon ${SERVICE_RUN_NICE_LEVEL} ripngd -d
 		fi
 	else
 		echo "Route Daemons already are running"
@@ -83,12 +83,13 @@ case "$1" in
         fi
         if [ "${RUN_RIPNGD}" = "yes" ] || [ "${RUN_RIPNGD}" = "YES" ]; then
                 show "Stopping RIPng Daemon"
-                killproc bgpd
+                killproc ripngd
         fi
 	
 	rm -f /var/lock/subsys/zebra
 	;;
   status)
+	status zebra
 	status mrtd
 	status bgpd
 	status ospf6d
