@@ -15,7 +15,8 @@ Source6:	zebra-ripngd.conf
 Source7:	zebra.init
 Source8:	zebra.sysconfig
 Source9:	zebra.log
-Patch:		zebra-info.patch
+Patch0:		zebra-info.patch
+Patch1:		zebra-linux.patch
 URL:		http://www.zebra.org/
 BuildRequires:	texinfo
 BuildRequires:	info
@@ -25,7 +26,6 @@ BuildRequires:	readline-devel
 BuildRequires:	ncurses-devel
 Prereq:		/sbin/install-info
 Prereq:		/sbin/chkconfig
-#Obsoletes:	mrt
 BuildRoot:	/tmp/%{name}-%{version}-root
 
 %define		_sysconfdir /etc/%{name}
@@ -54,19 +54,13 @@ Guile dla programu zebra.
 
 %prep
 %setup -q -n %{name}-%{version}
-%patch -p1
-
-if [ -d /proc/sys/net/ipv6 ]; then
-	echo "Yor system support ipv6"
-else
-	echo "Yor system doesn't support ipv6"
-	exit 1
-fi
+%patch0 -p1
+%patch1 -p1
 
 %build
-#autoconf
+autoconf
 LDFLAGS="-s"; export LDFLAGS 
-%configure --enable-guile
+%configure #--enable-guile
 
 make
 
