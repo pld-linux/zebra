@@ -1,0 +1,64 @@
+
+Taken from zebra mailing list:
+
+
+> List:     zebra
+> Subject:  [zebra 10775] if no nexthop received, bgpd sending updates with nexthop 0.0.0.0, fixed, patch attach
+> From:     Jan Oravec <wsx@wsx6.net>
+> Date:     2001-10-09 16:10:46
+
+> Hi,
+> 
+> I've found next problem in same function (bgp_packet_attribute)
+...
+> What is happening if some neighbor does not send BGP_ATTR_NEXT_HOP ?
+> The attr->nexthop.s_addr is 0.0.0.0 and the code in bgp_packet_attribute
+> sends it to another neighbor. Some neighbors does not accept nexthop 0.0.0.0
+> and close connection. Some others implementations ignore such advertisement.
+> Some others accepts it... But in fact, we broked that advertisement.
+> 
+...
+> The patch is attached.
+> 
+> First I forgot that BGP_ATTR_FLAG_TRANS should not be sent if
+> BGP_ATTR_NEXT_HOP is not sent. So it was sending wrong updates. bgpd daemon
+> crashed after about 10 seconds. The possible reason of this crash is that
+> neighbors complained about incorrect updates and bgpd probably cannot handle
+> such complains and crashs. It crashed in same code as the crash in bug
+> report I send week ago. I will try to debug it what was the reason of crash.
+> 
+
+diff -durN zebra-0.92a.orig/bgpd/bgp_attr.c zebra-0.92a/bgpd/bgp_attr.c
+--- zebra-0.92a.orig/bgpd/bgp_attr.c	Sun Aug 19 11:02:35 2001
++++ zebra-0.92a/bgpd/bgp_attr.c	Fri Apr 12 13:59:33 2002
+@@ -1440,18 +1440,20 @@
+     aspath_free (aspath);
+ 
+   /* Nexthop attribute. */
+-  stream_putc (s, BGP_ATTR_FLAG_TRANS);
+-  stream_putc (s, BGP_ATTR_NEXT_HOP);
+-  stream_putc (s, 4);
+-  if (safi == SAFI_MPLS_VPN)
++  if (attr->nexthop.s_addr)
+     {
+-      if (attr->nexthop.s_addr == 0)
+-	stream_put_ipv4 (s, peer->nexthop.v4.s_addr);
+-      else
+-	stream_put_ipv4 (s, attr->nexthop.s_addr);
++      stream_putc (s, BGP_ATTR_FLAG_TRANS);
++      stream_putc (s, BGP_ATTR_NEXT_HOP);
++      stream_putc (s, 4);
++      stream_put_ipv4 (s, attr->nexthop.s_addr);
++    }
++  else if(safi == SAFI_MPLS_VPN && peer->nexthop.v4.s_addr)
++    {
++      stream_putc (s, BGP_ATTR_FLAG_TRANS);
++      stream_putc (s, BGP_ATTR_NEXT_HOP);
++      stream_putc (s, 4);
++      stream_put_ipv4 (s, peer->nexthop.v4.s_addr);
+     }
+-  else
+-    stream_put_ipv4 (s, attr->nexthop.s_addr);
+ 
+   /* MED attribute. */
+   if (attr->flag & ATTR_FLAG_BIT (BGP_ATTR_MULTI_EXIT_DISC))
