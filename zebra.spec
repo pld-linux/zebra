@@ -62,6 +62,7 @@ trasy dla IPv6.
 
 %build
 rm -f ./missing
+rm -f doc/zebra.info
 aclocal
 autoconf
 automake -a -c
