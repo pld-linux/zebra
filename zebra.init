@@ -20,7 +20,10 @@
 [ -f /etc/sysconfig/zebra ] && . /etc/sysconfig/zebra
 
 # Check that networking is up.
-[ "${NETWORKING}" = "no" ] && echo "Error: Networking is down" && exit 0
+if [ "${NETWORKING}" = "no" ]; then
+	echo "WARNING: Networking is down. Zebra can't be runed."
+	exit 1
+fi
 
 # Sanity checks.
 [ -f /etc/zebra/zebra.conf ] || exit 0
