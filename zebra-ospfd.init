@@ -35,8 +35,9 @@ case "$1" in
   start)
 	# Check if the services are already running?
 	if [ ! -f /var/lock/subsys/ospfd ]; then
+		FLAGS="--daemon"
 		msg_starting ospfd
-		daemon ospfd -d 
+		daemon ospfd $FLAGS 
 		RETVAL=$?
 		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/ospfd
 	else

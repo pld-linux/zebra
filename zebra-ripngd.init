@@ -35,8 +35,10 @@ case "$1" in
   start)
 	# Check if the services are already running?
 	if [ ! -f /var/lock/subsys/ripngd ]; then
+		FLAGS="--daemon"
+		is_yes "$RETAIN_ROUTES" && FLAGS="$FLAGS --retain"
 		msg_starting ripngd
-		daemon ripngd -d 
+		daemon ripngd $FLAGS 
 		RETVAL=$?
 		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/ripngd
 	else

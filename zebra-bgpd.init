@@ -35,8 +35,11 @@ case "$1" in
   start)
 	# Check if the services are already running?
 	if [ ! -f /var/lock/subsys/bgpd ]; then
+		FLAGS="--daemon"
+		is_yes "$RETAIN_ROUTES" && FLAGS="$FLAGS --retain"
+		is_yes "$NO_KERNEL" && FLAGS="$FLAGS --no_kernel"
 		msg_starting bgpd
-		daemon bgpd -d 
+		daemon bgpd $FLAGS
 		RETVAL=$?
 		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/bgpd
 	else
