@@ -99,7 +99,7 @@ gzip -9nf README AUTHORS NEWS ChangeLog tools/* \
 if [ -f /var/run/zebra.pid ]; then
 	/etc/rc.d/init.d/zebra restart >&2
 else
-	echo "Run \"/etc/rc.d/init.d/zebra start\" to start routing deamon." >&2
+	echo "Run '/etc/rc.d/init.d/zebra start' to start routing deamon." >&2
 fi
     
 %preun
