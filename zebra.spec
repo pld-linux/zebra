@@ -24,6 +24,7 @@ Patch2:		%{name}-socket_paths.patch
 URL:		http://www.zebra.org/
 BuildRequires:	texinfo
 BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRequires:	readline-devel >= 4.1
 BuildRequires:	ncurses-devel >= 5.1
 BuildRequires:	ucd-snmp-devel
@@ -53,8 +54,8 @@ trasy dla IPv6.
 
 %build
 aclocal
-automake -i
 autoconf
+automake -a -c
 %configure \
 	--enable-one-vty \
 	--enable-ipv6 \
@@ -87,7 +88,6 @@ install %{SOURCE10} $RPM_BUILD_ROOT/etc/sysconfig/zebra
 install %{SOURCE11} $RPM_BUILD_ROOT/etc/logrotate.d/zebra
 
 touch $RPM_BUILD_ROOT/var/log/zebra/{zebra,bgpd,ospf6d,ospfd,ripd,ripngd}.log
-
 
 %post
 [ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
