@@ -1,7 +1,7 @@
 Summary:	Routing daemon
 Name:		zebra
 Version:	0.83
-Release:	2
+Release:	3
 Copyright:	GPL
 Group:		Networking/Daemons
 Group(pl):	Sieciowe/Serwery
@@ -96,7 +96,7 @@ gzip -9nf README AUTHORS NEWS ChangeLog tools/* \
 /sbin/chkconfig --add zebra >&2
 touch $RPM_BUILD_ROOT/var/log/zebra/{zebra,bgpd,ospf6d,ospfd,ripd,ripngd}.log
 
-if [ -f /var/run/zebra.pid ]; then
+if [ -f /var/lock/subsys/zebra ]; then
 	/etc/rc.d/init.d/zebra restart >&2
 else
 	echo "Run '/etc/rc.d/init.d/zebra start' to start routing deamon." >&2
@@ -104,9 +104,11 @@ fi
     
 %preun
 if [ "$1" = "0" ]; then
+	if [ -f /var/lock/subsys/zebra ]; then
+		/etc/rc.d/init.d/zebra stop >&2
+	fi
         /sbin/install-info --delete %{_infodir}/%{name}.info.gz \
 		/etc/info-dir >&2
-	/etc/rc.d/init.d/zebra stop >&2
         /sbin/chkconfig --del zebra >&2
 fi
 
