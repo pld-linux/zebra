@@ -1,9 +1,10 @@
 Summary:	Routing daemon
 Name:		zebra
-Version:	0.88
-Release:	2
+Version:	0.89
+Release:	1
 License:	GPL
 Group:		Networking/Daemons
+Group(de):	Netzwerkwesen/Server
 Group(pl):	Sieciowe/Serwery
 Source0:	ftp://ftp.zebra.org/pub/zebra/%{name}-%{version}.tar.gz
 Source1:	%{name}.conf
@@ -44,6 +45,7 @@ trasy dla IPv6.
 Summary:	Guile interface for zebra routing daemon
 Summary:	Guile dla programu zebra
 Group:		Networking/Daemons
+Group(de):	Netzwerkwesen/Server
 Group(pl):	Sieciowe/Serwery
 Requires:	%{name} = %{version}
 
@@ -55,14 +57,13 @@ Guile dla programu zebra.
 
 %prep
 %setup  -q
-#%patch0 -p1
+%patch0 -p1
 %patch1 -p1
 
 %build
 aclocal
 automake
 autoconf
-LDFLAGS="-s"; export LDFLAGS 
 %configure \
 	--enable-one-vty \
 	--enable-ipv6 \
@@ -93,8 +94,7 @@ install %{SOURCE9} $RPM_BUILD_ROOT/etc/logrotate.d/zebra
 
 touch $RPM_BUILD_ROOT/var/log/zebra/{zebra,bgpd,ospf6d,ospfd,ripd,ripngd}.log
 
-gzip -9nf README AUTHORS NEWS ChangeLog tools/* \
-	$RPM_BUILD_ROOT%{_infodir}/* 
+gzip -9nf README AUTHORS NEWS ChangeLog tools/*
 
 %post
 [ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
