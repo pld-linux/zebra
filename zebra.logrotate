@@ -2,10 +2,5 @@
 	olddir /var/log/archiv/zebra
 	postrotate
 		/bin/killall -USR1 zebra >/dev/null 2>&1
-		/bin/killall -USR1 bgpd >/dev/null 2>&1
-		/bin/killall -USR1 ospf6d >/dev/null 2>&1
-		/bin/killall -USR1 ospfd >/dev/null 2>&1
-		/bin/killall -USR1 ripd >/dev/null 2>&1
-		/bin/killall -USR1 ripngd >/dev/null 2>&1
 	endscript
 }
