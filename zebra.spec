@@ -1,11 +1,11 @@
 Summary:	Routing daemon
 Name:		zebra
-Version:	0.70
-Release:	1
+Version:	0.71
+Release:	0.1
 Copyright:	GPL
 Group:		Networking/Daemons
 Group(pl):	Sieciowe/Serwery
-Source0:	ftp://ftp.zebra.org/%{name}-%{version}.tar.gz
+Source0:	ftp://ftp.zebra.org/%{name}-%{version}-pre.tar.gz
 Source1:	zebra.conf
 Source2:	zebra-bgpd.conf
 Source3:	zebra-ospf6d.conf
@@ -53,7 +53,7 @@ Guile interface for zebra routing daemon.
 Guile dla programu zebra.
 
 %prep
-%setup -q
+%setup -q -n %{name}-%{version}-pre
 %patch -p1
 
 if [ -d /proc/sys/net/ipv6 ]; then
@@ -66,15 +66,16 @@ fi
 %build
 #autoconf
 LDFLAGS="-s"; export LDFLAGS 
-%configure \
-	--enable-guile
+%configure #\
+#	--enable-guile
 
 make
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,sysconfig,logrotate.d}
+install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,sysconfig,logrotate.d} \
+	$RPM_BUILD_ROOT/var/log/zebra
 
 make install \
 	DESTDIR=$RPM_BUILD_ROOT
@@ -89,12 +90,25 @@ install %{SOURCE7} $RPM_BUILD_ROOT/etc/rc.d/init.d/zebra
 install %{SOURCE8} $RPM_BUILD_ROOT/etc/sysconfig/zebra
 install %{SOURCE9} $RPM_BUILD_ROOT/etc/logrotate.d/zebra
 
+touch $RPM_BUILD_ROOT/var/log/zebra/zebra.log
+touch $RPM_BUILD_ROOT/var/log/zebra/bgpd.log
+touch $RPM_BUILD_ROOT/var/log/zebra/ospf6d.log
+touch $RPM_BUILD_ROOT/var/log/zebra/ospfd.log
+touch $RPM_BUILD_ROOT/var/log/zebra/ripd.log
+touch $RPM_BUILD_ROOT/var/log/zebra/ripngd.log
+
 gzip -9nf README AUTHORS NEWS ChangeLog tools/* \
 	$RPM_BUILD_ROOT%{_infodir}/* 
 
 %post
 /sbin/install-info %{_infodir}/%{name}.info.gz /etc/info-dir >&2
 /sbin/chkconfig --add zebra >&2
+touch /var/log/zebra/zebra.log
+touch /var/log/zebra/bgpd.log
+touch /var/log/zebra/ospf6d.log
+touch /var/log/zebra/ospfd.log
+touch /var/log/zebra/ripd.log
+touch /var/log/zebra/ripngd.log
 
 if [ -f /var/run/zebra.pid ]; then
 	/etc/rc.d/init.d/zebra restart >&2
@@ -123,10 +137,12 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %verify(not md5 size mtime) %attr(640,root,root) /etc/logrotate.d/*
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/*.conf
 %doc %{_sysconfdir}/*.sample
+%dir %attr(750,root,root) /var/log/zebra
+%ghost /var/log/zebra/*
 
 %files guile
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/*
+#%defattr(644,root,root,755)
+#%attr(755,root,root) %{_bindir}/*
 
 %changelog
 * Sun May 16 1999 Artur Frysiak <wiget@pld.org.pl>
