@@ -17,7 +17,7 @@
 . /etc/sysconfig/network
 
 # Get service config
-[ -f /etc/sysconfig/ripd ] && . /etc/sysconfig/bgpd
+[ -f /etc/sysconfig/ripd ] && . /etc/sysconfig/ripd
 
 # Check that networking is up.
 if is_yes "${NETWORKING}"; then
