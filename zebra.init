@@ -57,6 +57,8 @@ case "$1" in
 			msg_starting "RIPng"
 			daemon ${SERVICE_RUN_NICE_LEVEL} ripngd -d
 		fi
+		msg_starting "vtysh"
+		daemon vtysh -b
 		touch /var/lock/subsys/zebra
 	else
 		msg_Already_Running "Zebra"
