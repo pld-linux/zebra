@@ -54,6 +54,7 @@ Obsoletes:	bird
 Obsoletes:	gated
 Obsoletes:	mrt
 Obsoletes:	zebra-xs26
+Obsoletes:	quagga
 
 %define		_sysconfdir	/etc/%{name}
 
