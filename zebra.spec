@@ -40,14 +40,14 @@ Patch3:		%{name}-nolog.patch
 URL:		http://www.zebra.org/
 BuildRequires:	autoconf >= 2.53
 BuildRequires:	automake
-BuildRequires:	readline-devel >= 4.1
 BuildRequires:	ncurses-devel >= 5.1
 BuildRequires:	pam-devel
+BuildRequires:	readline-devel >= 4.1
 BuildRequires:	texinfo
 %{?with_snmp:BuildRequires:	ucd-snmp-devel >= 4.2.6}
-PreReq:		rc-scripts
-Requires(post,preun):	/sbin/chkconfig
 Requires(post):	/bin/hostname
+Requires(post,preun):	/sbin/chkconfig
+Requires:	rc-scripts
 Provides:	routingdaemon
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	bird
@@ -123,8 +123,8 @@ Demon do obs³ugi protoko³u OSPF.
 Summary:	IPv6 OSPF routing daemon
 Summary(pl):	Demon routingu OSPF w sieciach IPv6
 Group:		Networking/Daemons
-Requires:	%{name} = %{version}-%{release}
 Requires(post,preun):	/sbin/chkconfig
+Requires:	%{name} = %{version}-%{release}
 Obsoletes:	zebra-xs26-ospf6d
 
 %description ospf6d
@@ -150,8 +150,8 @@ Demon obs³ugi protoko³u RIP.
 Summary:	IPv6 RIP routing daemon
 Summary(pl):	Demon routingu RIP w sieciach IPv6
 Group:		Networking/Daemons
-Requires:	%{name} = %{version}-%{release}
 Requires(post,preun):	/sbin/chkconfig
+Requires:	%{name} = %{version}-%{release}
 Obsoletes:	zebra-xs26-ripngd
 
 %description ripngd
@@ -333,8 +333,8 @@ fi
 %{_mandir}/man1/*
 %attr(755,root,root) %{_bindir}/*
 %dir %attr(750,root,root) %{_sysconfdir}
-%config(noreplace) %verify(not md5 size mtime) %attr(640,root,root) %{_sysconfdir}/*.conf
-%config(noreplace) %verify(not md5 size mtime) /etc/pam.d/zebra
+%config(noreplace) %verify(not md5 mtime size) %attr(640,root,root) %{_sysconfdir}/*.conf
+%config(noreplace) %verify(not md5 mtime size) /etc/pam.d/zebra
 %dir %attr(750,root,root) /var/run/zebra
 %dir %attr(750,root,root) /var/log/zebra
 %dir %attr(750,root,root) /var/log/archiv/zebra
@@ -343,8 +343,8 @@ fi
 %{_mandir}/man8/zebra*
 %attr(755,root,root) %{_sbindir}/zebra
 %attr(754,root,root) /etc/rc.d/init.d/zebra
-%config(noreplace) %verify(not md5 size mtime) %attr(640,root,root) /etc/sysconfig/zebra
-%config(noreplace) %verify(not md5 size mtime) %attr(640,root,root) /etc/logrotate.d/zebra
+%config(noreplace) %verify(not md5 mtime size) %attr(640,root,root) /etc/sysconfig/zebra
+%config(noreplace) %verify(not md5 mtime size) %attr(640,root,root) /etc/logrotate.d/zebra
 %ghost /var/log/zebra/zebra*
 
 %files bgpd
@@ -353,8 +353,8 @@ fi
 %{_mandir}/man8/bgpd*
 %attr(755,root,root) %{_sbindir}/bgpd
 %attr(754,root,root) /etc/rc.d/init.d/bgpd
-%config(noreplace) %verify(not md5 size mtime) %attr(640,root,root) /etc/sysconfig/bgpd
-%config(noreplace) %verify(not md5 size mtime) %attr(640,root,root) /etc/logrotate.d/bgpd
+%config(noreplace) %verify(not md5 mtime size) %attr(640,root,root) /etc/sysconfig/bgpd
+%config(noreplace) %verify(not md5 mtime size) %attr(640,root,root) /etc/logrotate.d/bgpd
 %ghost /var/log/zebra/bgpd*
 
 %files ospfd
@@ -363,8 +363,8 @@ fi
 %{_mandir}/man8/ospfd*
 %attr(755,root,root) %{_sbindir}/ospfd
 %attr(754,root,root) /etc/rc.d/init.d/ospfd
-%config(noreplace) %verify(not md5 size mtime) %attr(640,root,root) /etc/sysconfig/ospfd
-%config(noreplace) %verify(not md5 size mtime) %attr(640,root,root) /etc/logrotate.d/ospfd
+%config(noreplace) %verify(not md5 mtime size) %attr(640,root,root) /etc/sysconfig/ospfd
+%config(noreplace) %verify(not md5 mtime size) %attr(640,root,root) /etc/logrotate.d/ospfd
 %ghost /var/log/zebra/ospfd*
 
 %files ospf6d
@@ -373,8 +373,8 @@ fi
 %{_mandir}/man8/ospf6d*
 %attr(755,root,root) %{_sbindir}/ospf6d
 %attr(754,root,root) /etc/rc.d/init.d/ospf6d
-%config(noreplace) %verify(not md5 size mtime) %attr(640,root,root) /etc/sysconfig/ospf6d
-%config(noreplace) %verify(not md5 size mtime) %attr(640,root,root) /etc/logrotate.d/ospf6d
+%config(noreplace) %verify(not md5 mtime size) %attr(640,root,root) /etc/sysconfig/ospf6d
+%config(noreplace) %verify(not md5 mtime size) %attr(640,root,root) /etc/logrotate.d/ospf6d
 %ghost /var/log/zebra/ospf6d*
 
 %files ripd
@@ -383,8 +383,8 @@ fi
 %{_mandir}/man8/ripd*
 %attr(755,root,root) %{_sbindir}/ripd
 %attr(754,root,root) /etc/rc.d/init.d/ripd
-%config(noreplace) %verify(not md5 size mtime) %attr(640,root,root) /etc/sysconfig/ripd
-%config(noreplace) %verify(not md5 size mtime) %attr(640,root,root) /etc/logrotate.d/ripd
+%config(noreplace) %verify(not md5 mtime size) %attr(640,root,root) /etc/sysconfig/ripd
+%config(noreplace) %verify(not md5 mtime size) %attr(640,root,root) /etc/logrotate.d/ripd
 %ghost /var/log/zebra/ripd*
 
 %files ripngd
@@ -393,6 +393,6 @@ fi
 %{_mandir}/man8/ripngd*
 %attr(755,root,root) %{_sbindir}/ripngd
 %attr(754,root,root) /etc/rc.d/init.d/ripngd
-%config(noreplace) %verify(not md5 size mtime) %attr(640,root,root) /etc/sysconfig/ripngd
-%config(noreplace) %verify(not md5 size mtime) %attr(640,root,root) /etc/logrotate.d/ripngd
+%config(noreplace) %verify(not md5 mtime size) %attr(640,root,root) /etc/sysconfig/ripngd
+%config(noreplace) %verify(not md5 mtime size) %attr(640,root,root) /etc/logrotate.d/ripngd
 %ghost /var/log/zebra/ripngd*
