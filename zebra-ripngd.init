@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# ripngd		Starts the Dynamic Route Daemon 
+# ripngd		Starts the Dynamic Route Daemon
 #
 # chkconfig:	345 15 84
 #
@@ -38,7 +38,7 @@ case "$1" in
 		FLAGS="--daemon"
 		is_yes "$RETAIN_ROUTES" && FLAGS="$FLAGS --retain"
 		msg_starting ripngd
-		daemon ripngd $FLAGS 
+		daemon ripngd $FLAGS
 		RETVAL=$?
 		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/ripngd
 	else
