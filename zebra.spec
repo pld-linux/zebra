@@ -43,18 +43,19 @@ BuildRequires:	automake
 BuildRequires:	ncurses-devel >= 5.1
 BuildRequires:	pam-devel
 BuildRequires:	readline-devel >= 4.1
+BuildRequires:	rpmbuild(macros) >= 1.268
 BuildRequires:	texinfo
 %{?with_snmp:BuildRequires:	ucd-snmp-devel >= 4.2.6}
 Requires(post):	/bin/hostname
 Requires(post,preun):	/sbin/chkconfig
 Requires:	rc-scripts
 Provides:	routingdaemon
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	bird
 Obsoletes:	gated
 Obsoletes:	mrt
-Obsoletes:	zebra-xs26
 Obsoletes:	quagga
+Obsoletes:	zebra-xs26
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sysconfdir	/etc/%{name}
 
@@ -229,97 +230,61 @@ umask 027
 if [ ! -s %{_sysconfdir}/zebra.conf ]; then
 	echo "hostname `hostname`" > %{_sysconfdir}/zebra.conf
 fi
-if [ -f /var/lock/subsys/zebra ]; then
-	/etc/rc.d/init.d/zebra restart >&2
-else
-	echo "Run '/etc/rc.d/init.d/zebra start' to start main routing deamon." >&2
-fi
+%service zebra restart "main routing deamon"
 
 %post bgpd
 /sbin/chkconfig --add bgpd >&2
-if [ -f /var/lock/subsys/bgpd ]; then
-	/etc/rc.d/init.d/bgpd restart >&2
-else
-	echo "Run '/etc/rc.d/init.d/bgpd start' to start bgpd routing deamon." >&2
-fi
+%service bgpd restart "bgpd routing deamon"
 
 %post ospfd
 /sbin/chkconfig --add ospfd >&2
-if [ -f /var/lock/subsys/ospfd ]; then
-	/etc/rc.d/init.d/ospfd restart >&2
-else
-	echo "Run '/etc/rc.d/init.d/ospfd start' to start ospfd routing deamon." >&2
-fi
+%service ospfd restart "ospfd routing deamon"
 
 %post ospf6d
 /sbin/chkconfig --add ospf6d >&2
-if [ -f /var/lock/subsys/ospf6d ]; then
-	/etc/rc.d/init.d/ospf6d restart >&2
-else
-	echo "Run '/etc/rc.d/init.d/ospf6d start' to start ospf6d routing deamon." >&2
-fi
+%service ospf6d restart "ospf6d routing deamon"
 
 %post ripd
 /sbin/chkconfig --add ripd >&2
-if [ -f /var/lock/subsys/ripd ]; then
-	/etc/rc.d/init.d/ripd restart >&2
-else
-	echo "Run '/etc/rc.d/init.d/ripd start' to start ripd routing deamon." >&2
-fi
+%service ripd restart "ripd routing deamon"
 
 %post ripngd
 /sbin/chkconfig --add ripngd >&2
-if [ -f /var/lock/subsys/ripngd ]; then
-	/etc/rc.d/init.d/ripngd restart >&2
-else
-	echo "Run '/etc/rc.d/init.d/ripngd start' to start ripngd routing deamon." >&2
-fi
+%service ripngd restart "ripngd routing deamon"
 
 %preun
 if [ "$1" = "0" ]; then
-	if [ -f /var/lock/subsys/zebra ]; then
-		/etc/rc.d/init.d/zebra stop >&2
-	fi
+	%service zebra stop
 	/sbin/chkconfig --del zebra >&2
 fi
 
 %preun bgpd
 if [ "$1" = "0" ]; then
-	if [ -f /var/lock/subsys/bgpd ]; then
-		/etc/rc.d/init.d/bgpd stop >&2
-	fi
+	%service bgpd stop
 	/sbin/chkconfig --del bgpd >&2
 fi
 
 %preun ospfd
 if [ "$1" = "0" ]; then
-	if [ -f /var/lock/subsys/ospfd ]; then
-		/etc/rc.d/init.d/ospfd stop >&2
-	fi
+	%service ospfd stop
 	/sbin/chkconfig --del ospfd >&2
 fi
 
 %preun ospf6d
 if [ "$1" = "0" ]; then
-	if [ -f /var/lock/subsys/ospf6d ]; then
-		/etc/rc.d/init.d/ospf6d stop >&2
-	fi
+	%service ospf6d stop
 	/sbin/chkconfig --del ospf6d >&2
 fi
 
 %preun ripd
 if [ "$1" = "0" ]; then
-	if [ -f /var/lock/subsys/ripd ]; then
-		/etc/rc.d/init.d/ripd stop >&2
-	fi
+	%service ripd stop
 	/sbin/chkconfig --del ripd >&2
 fi
 
 %preun ripngd
 if [ "$1" = "0" ]; then
-	if [ -f /var/lock/subsys/ripngd ]; then
-		/etc/rc.d/init.d/ripngd stop >&2
-	fi
+	%service ripngd stop
 	/sbin/chkconfig --del ripngd >&2
 fi
 
