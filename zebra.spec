@@ -3,10 +3,10 @@
 %bcond_with	snmp	# with SNMP support (broken?)
 #
 Summary:	Routing daemon
-Summary(pl.UTF-8):   Demon routingu
-Summary(pt_BR.UTF-8):   Servidor de roteamento multi-protocolo
-Summary(ru.UTF-8):   Демон маршрутизации Zebra
-Summary(uk.UTF-8):   Демон маршрутизації Zebra
+Summary(pl.UTF-8):	Demon routingu
+Summary(pt_BR.UTF-8):	Servidor de roteamento multi-protocolo
+Summary(ru.UTF-8):	Демон маршрутизации Zebra
+Summary(uk.UTF-8):	Демон маршрутизації Zebra
 Name:		zebra
 Version:	0.94
 Release:	5
@@ -95,7 +95,7 @@ RIPng.
 
 %package bgpd
 Summary:	BGP routing daemon
-Summary(pl.UTF-8):   Demon routingu BGP
+Summary(pl.UTF-8):	Demon routingu BGP
 Group:		Networking/Daemons
 Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name} = %{version}-%{release}
@@ -109,7 +109,7 @@ Demon obsługi protokołu BGP. Obsługuje także IPv6.
 
 %package ospfd
 Summary:	OSPF routing daemon
-Summary(pl.UTF-8):   Demon routingu OSPF
+Summary(pl.UTF-8):	Demon routingu OSPF
 Group:		Networking/Daemons
 Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name} = %{version}-%{release}
@@ -122,7 +122,7 @@ Demon do obsługi protokołu OSPF.
 
 %package ospf6d
 Summary:	IPv6 OSPF routing daemon
-Summary(pl.UTF-8):   Demon routingu OSPF w sieciach IPv6
+Summary(pl.UTF-8):	Demon routingu OSPF w sieciach IPv6
 Group:		Networking/Daemons
 Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name} = %{version}-%{release}
@@ -136,7 +136,7 @@ Demon obsługi protokołu OSPF w sieciach IPv6.
 
 %package ripd
 Summary:	RIP routing daemon
-Summary(pl.UTF-8):   Demon routingu RIP
+Summary(pl.UTF-8):	Demon routingu RIP
 Group:		Networking/Daemons
 Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name} = %{version}-%{release}
@@ -149,7 +149,7 @@ Demon obsługi protokołu RIP.
 
 %package ripngd
 Summary:	IPv6 RIP routing daemon
-Summary(pl.UTF-8):   Demon routingu RIP w sieciach IPv6
+Summary(pl.UTF-8):	Demon routingu RIP w sieciach IPv6
 Group:		Networking/Daemons
 Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name} = %{version}-%{release}
