@@ -3,10 +3,10 @@
 %bcond_with	snmp	# with SNMP support (broken?)
 #
 Summary:	Routing daemon
-Summary(pl):	Demon routingu
-Summary(pt_BR):	Servidor de roteamento multi-protocolo
-Summary(ru):	‰≈ÕœŒ Õ¡“€“’‘…⁄¡√…… Zebra
-Summary(uk):	‰≈ÕœŒ Õ¡“€“’‘…⁄¡√¶ß Zebra
+Summary(pl.UTF-8):   Demon routingu
+Summary(pt_BR.UTF-8):   Servidor de roteamento multi-protocolo
+Summary(ru.UTF-8):   –î–µ–º–æ–Ω –º–∞—Ä—à—Ä—É—Ç–∏–∑–∞—Ü–∏–∏ Zebra
+Summary(uk.UTF-8):   –î–µ–º–æ–Ω –º–∞—Ä—à—Ä—É—Ç–∏–∑–∞—Ü—ñ—ó Zebra
 Name:		zebra
 Version:	0.94
 Release:	5
@@ -66,36 +66,36 @@ and so on. Zebra turns your machine into a full powered router.
 
 Daemons for each routing protocols are available in separate packages.
 
-%description -l pl
-Program do dynamicznego ustawiania tablicy tras. Moøe takøe ustalaÊ
+%description -l pl.UTF-8
+Program do dynamicznego ustawiania tablicy tras. Mo≈ºe tak≈ºe ustalaƒá
 trasy dla IPv6.
 
-Demony obs≥uguj±ce poszczegÛlne protoko≥y dostÍpne s± w osobnych
+Demony obs≈ÇugujƒÖce poszczeg√≥lne protoko≈Çy dostƒôpne sƒÖ w osobnych
 pakietach.
 
-%description -l pt_BR
-Zebra È um servidor m˙ltiplo para roteamento, provendo suporte aos
+%description -l pt_BR.UTF-8
+Zebra √© um servidor m√∫ltiplo para roteamento, provendo suporte aos
 protocolos baseados em TCP/IP (inclusive IPv6) tais como RIP, OSPF,
-BGP, entre outros. Zebra transforma sua m·quina em um poderoso
+BGP, entre outros. Zebra transforma sua m√°quina em um poderoso
 roteador.
 
-%description -l ru
-GNU Zebra - ‹‘œ ”◊œ¬œƒŒœ≈ –“œ«“¡ÕÕŒœ≈ œ¬≈”–≈ﬁ≈Œ…≈, “¡¬œ‘¡¿›≈≈ ”
-œ”Œœ◊¡ŒŒŸÕ… Œ¡ TCP/IP –“œ‘œÀœÃ¡Õ… Õ¡“€“’‘…⁄¡√…….
+%description -l ru.UTF-8
+GNU Zebra - —ç—Ç–æ —Å–≤–æ–±–æ–¥–Ω–æ–µ –ø—Ä–æ–≥—Ä–∞–º–º–Ω–æ–µ –æ–±–µ—Å–ø–µ—á–µ–Ω–∏–µ, —Ä–∞–±–æ—Ç–∞—é—â–µ–µ —Å
+–æ—Å–Ω–æ–≤–∞–Ω–Ω—ã–º–∏ –Ω–∞ TCP/IP –ø—Ä–æ—Ç–æ–∫–æ–ª–∞–º–∏ –º–∞—Ä—à—Ä—É—Ç–∏–∑–∞—Ü–∏–∏.
 
-GNU Zebra –œƒƒ≈“÷…◊¡≈‘ BGP4, BGP4+, OSPFv2, OSPFv3, RIPv1, RIPv2 …
+GNU Zebra –ø–æ–¥–¥–µ—Ä–∂–∏–≤–∞–µ—Ç BGP4, BGP4+, OSPFv2, OSPFv3, RIPv1, RIPv2 –∏
 RIPng.
 
-%description -l uk
-GNU Zebra - √≈ ◊¶ÃÿŒ≈ –“œ«“¡ÕŒ≈ ⁄¡¬≈⁄–≈ﬁ≈ŒŒ—, ›œ –“¡√¿§ ⁄ ¬¡⁄œ◊¡Œ…Õ…
-Œ¡ TCP/IP –“œ‘œÀœÃ¡Õ… Õ¡“€“’‘…⁄¡√¶ß.
+%description -l uk.UTF-8
+GNU Zebra - —Ü–µ –≤—ñ–ª—å–Ω–µ –ø—Ä–æ–≥—Ä–∞–º–Ω–µ –∑–∞–±–µ–∑–ø–µ—á–µ–Ω–Ω—è, —â–æ –ø—Ä–∞—Ü—é—î –∑ –±–∞–∑–æ–≤–∞–Ω–∏–º–∏
+–Ω–∞ TCP/IP –ø—Ä–æ—Ç–æ–∫–æ–ª–∞–º–∏ –º–∞—Ä—à—Ä—É—Ç–∏–∑–∞—Ü—ñ—ó.
 
-GNU Zebra –¶ƒ‘“…Õ’§ BGP4, BGP4+, OSPFv2, OSPFv3, RIPv1, RIPv2 ‘¡
+GNU Zebra –ø—ñ–¥—Ç—Ä–∏–º—É—î BGP4, BGP4+, OSPFv2, OSPFv3, RIPv1, RIPv2 —Ç–∞
 RIPng.
 
 %package bgpd
 Summary:	BGP routing daemon
-Summary(pl):	Demon routingu BGP
+Summary(pl.UTF-8):   Demon routingu BGP
 Group:		Networking/Daemons
 Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name} = %{version}-%{release}
@@ -104,12 +104,12 @@ Obsoletes:	zebra-xs26-bgpd
 %description bgpd
 BGP routing daemon. Includes IPv6 support.
 
-%description bgpd -l pl
-Demon obs≥ugi protoko≥u BGP. Obs≥uguje takøe IPv6.
+%description bgpd -l pl.UTF-8
+Demon obs≈Çugi protoko≈Çu BGP. Obs≈Çuguje tak≈ºe IPv6.
 
 %package ospfd
 Summary:	OSPF routing daemon
-Summary(pl):	Demon routingu OSPF
+Summary(pl.UTF-8):   Demon routingu OSPF
 Group:		Networking/Daemons
 Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name} = %{version}-%{release}
@@ -117,12 +117,12 @@ Requires:	%{name} = %{version}-%{release}
 %description ospfd
 OSPF routing daemon.
 
-%description ospfd -l pl
-Demon do obs≥ugi protoko≥u OSPF.
+%description ospfd -l pl.UTF-8
+Demon do obs≈Çugi protoko≈Çu OSPF.
 
 %package ospf6d
 Summary:	IPv6 OSPF routing daemon
-Summary(pl):	Demon routingu OSPF w sieciach IPv6
+Summary(pl.UTF-8):   Demon routingu OSPF w sieciach IPv6
 Group:		Networking/Daemons
 Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name} = %{version}-%{release}
@@ -131,12 +131,12 @@ Obsoletes:	zebra-xs26-ospf6d
 %description ospf6d
 OSPF6 routing daemon for IPv6 networks.
 
-%description ospf6d -l pl
-Demon obs≥ugi protoko≥u OSPF w sieciach IPv6.
+%description ospf6d -l pl.UTF-8
+Demon obs≈Çugi protoko≈Çu OSPF w sieciach IPv6.
 
 %package ripd
 Summary:	RIP routing daemon
-Summary(pl):	Demon routingu RIP
+Summary(pl.UTF-8):   Demon routingu RIP
 Group:		Networking/Daemons
 Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name} = %{version}-%{release}
@@ -144,12 +144,12 @@ Requires:	%{name} = %{version}-%{release}
 %description ripd
 RIP routing daemon for zebra.
 
-%description ripd -l pl
-Demon obs≥ugi protoko≥u RIP.
+%description ripd -l pl.UTF-8
+Demon obs≈Çugi protoko≈Çu RIP.
 
 %package ripngd
 Summary:	IPv6 RIP routing daemon
-Summary(pl):	Demon routingu RIP w sieciach IPv6
+Summary(pl.UTF-8):   Demon routingu RIP w sieciach IPv6
 Group:		Networking/Daemons
 Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name} = %{version}-%{release}
@@ -158,8 +158,8 @@ Obsoletes:	zebra-xs26-ripngd
 %description ripngd
 RIP routing daemon for IPv6 networks.
 
-%description ripngd -l pl
-Demon obs≥ugi protoko≥u RIP w sieciach IPv6.
+%description ripngd -l pl.UTF-8
+Demon obs≈Çugi protoko≈Çu RIP w sieciach IPv6.
 
 %prep
 %setup -q
