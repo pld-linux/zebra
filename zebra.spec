@@ -302,7 +302,7 @@ fi
 %config(noreplace) %verify(not md5 mtime size) /etc/pam.d/zebra
 %dir %attr(750,root,root) /var/run/zebra
 %dir %attr(750,root,root) /var/log/zebra
-%dir %attr(750,root,root) /var/log/archiv/zebra
+%dir %attr(750,root,root) /var/log/archive/zebra
 
 %doc zebra/*sample*
 %{_mandir}/man8/zebra*
