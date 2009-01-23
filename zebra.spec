@@ -8,12 +8,12 @@ Summary(pt_BR.UTF-8):	Servidor de roteamento multi-protocolo
 Summary(ru.UTF-8):	Демон маршрутизации Zebra
 Summary(uk.UTF-8):	Демон маршрутизації Zebra
 Name:		zebra
-Version:	0.94
-Release:	5
+Version:	0.95a
+Release:	1
 License:	GPL
 Group:		Networking/Daemons
 Source0:	ftp://ftp.zebra.org/pub/zebra/%{name}-%{version}.tar.gz
-# Source0-md5:	ff1633f1ac026b720fa37b1856be3f48
+# Source0-md5:	9b8fec2d4f910334e50167414fcf193b
 Source1:	%{name}.pam
 Source10:	%{name}-zebra.init
 Source11:	%{name}-bgpd.init
@@ -175,7 +175,6 @@ Demon obsługi protokołu RIP w sieciach IPv6.
 %{__automake}
 %{__autoheader}
 %configure \
-	--enable-one-vty \
 	--enable-ipv6 \
 	--enable-netlink \
 	%{!?with_snmp:--disable-snmp} \
@@ -300,6 +299,7 @@ fi
 %attr(755,root,root) %{_bindir}/*
 %dir %attr(750,root,root) %{_sysconfdir}
 %config(noreplace) %verify(not md5 mtime size) %attr(640,root,root) %{_sysconfdir}/*.conf
+%attr(640,root,root) %{_sysconfdir}/*.sample*
 %config(noreplace) %verify(not md5 mtime size) /etc/pam.d/zebra
 %dir %attr(750,root,root) /var/run/zebra
 %dir %attr(750,root,root) /var/log/zebra
