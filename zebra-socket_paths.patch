@@ -1,7 +1,7 @@
-diff -durN zebra-0.93.orig/bgpd/bgpd.h zebra-0.93/bgpd/bgpd.h
---- zebra-0.93.orig/bgpd/bgpd.h	Sat Jun 29 08:20:39 2002
-+++ zebra-0.93/bgpd/bgpd.h	Sun Jul  7 17:56:01 2002
-@@ -608,7 +608,7 @@
+diff -burNp zebra-0.95a/bgpd/bgpd.h zebra-0.95a-dud/bgpd/bgpd.h
+--- zebra-0.95a/bgpd/bgpd.h	2005-08-05 12:18:33.000000000 +0200
++++ zebra-0.95a-dud/bgpd/bgpd.h	2009-01-23 09:32:41.733189182 +0100
+@@ -700,7 +700,7 @@ struct bgp_nlri
  
  /* Default configuration settings for bgpd.  */
  #define BGP_VTY_PORT                          2605
@@ -10,22 +10,10 @@ diff -durN zebra-0.93.orig/bgpd/bgpd.h zebra-0.93/bgpd/bgpd.h
  #define BGP_DEFAULT_CONFIG             "bgpd.conf"
  
  /* Check AS path loop when we send NLRI.  */
-diff -durN zebra-0.93.orig/ospf6d/ospf6d.h zebra-0.93/ospf6d/ospf6d.h
---- zebra-0.93.orig/ospf6d/ospf6d.h	Sun Jul  7 10:12:48 2002
-+++ zebra-0.93/ospf6d/ospf6d.h	Sun Jul  7 17:54:52 2002
-@@ -96,7 +96,7 @@
- 
- /* Default port values. */
- #define OSPF6_VTY_PORT             2606
--#define OSPF6_VTYSH_PATH           "/tmp/.ospf6d"
-+#define OSPF6_VTYSH_PATH           "/var/run/zebra/ospf6d"
- 
- #ifdef INRIA_IPV6
- #ifndef IPV6_PKTINFO
-diff -durN zebra-0.93.orig/ospfd/ospfd.h zebra-0.93/ospfd/ospfd.h
---- zebra-0.93.orig/ospfd/ospfd.h	Sat Jul  6 09:36:59 2002
-+++ zebra-0.93/ospfd/ospfd.h	Sun Jul  7 17:54:52 2002
-@@ -34,7 +34,7 @@
+diff -burNp zebra-0.95a/ospfd/ospfd.h zebra-0.95a-dud/ospfd/ospfd.h
+--- zebra-0.95a/ospfd/ospfd.h	2003-03-28 20:55:29.000000000 +0100
++++ zebra-0.95a-dud/ospfd/ospfd.h	2009-01-23 09:34:50.019847042 +0100
+@@ -39,7 +39,7 @@
  
  /* VTY port number. */
  #define OSPF_VTY_PORT          2604
@@ -34,10 +22,10 @@ diff -durN zebra-0.93.orig/ospfd/ospfd.h zebra-0.93/ospfd/ospfd.h
  
  /* IP TTL for OSPF protocol. */
  #define OSPF_IP_TTL             1
-diff -durN zebra-0.93.orig/ripd/ripd.h zebra-0.93/ripd/ripd.h
---- zebra-0.93.orig/ripd/ripd.h	Sat Jan 27 10:24:23 2001
-+++ zebra-0.93/ripd/ripd.h	Sun Jul  7 17:54:52 2002
-@@ -64,7 +64,7 @@
+diff -burNp zebra-0.95a/ripd/ripd.h zebra-0.95a-dud/ripd/ripd.h
+--- zebra-0.95a/ripd/ripd.h	2004-06-01 07:08:47.000000000 +0200
++++ zebra-0.95a-dud/ripd/ripd.h	2009-01-23 09:35:57.797127225 +0100
+@@ -68,7 +68,7 @@
  /* RIP port number. */
  #define RIP_PORT_DEFAULT               520
  #define RIP_VTY_PORT                  2602
@@ -46,9 +34,9 @@ diff -durN zebra-0.93.orig/ripd/ripd.h zebra-0.93/ripd/ripd.h
  
  /* Default configuration file name. */
  #define RIPD_DEFAULT_CONFIG    "ripd.conf"
-diff -durN zebra-0.93.orig/ripngd/ripngd.h zebra-0.93/ripngd/ripngd.h
---- zebra-0.93.orig/ripngd/ripngd.h	Wed Dec 19 21:31:38 2001
-+++ zebra-0.93/ripngd/ripngd.h	Sun Jul  7 17:54:52 2002
+diff -burNp zebra-0.95a/ripngd/ripngd.h zebra-0.95a-dud/ripngd/ripngd.h
+--- zebra-0.95a/ripngd/ripngd.h	2001-12-19 21:31:38.000000000 +0100
++++ zebra-0.95a-dud/ripngd/ripngd.h	2009-01-23 09:40:52.567514443 +0100
 @@ -27,7 +27,7 @@
  #define RIPNG_V1                         1
  #define RIPNG_PORT_DEFAULT             521
@@ -58,9 +46,9 @@ diff -durN zebra-0.93.orig/ripngd/ripngd.h zebra-0.93/ripngd/ripngd.h
  #define RIPNG_MAX_PACKET_SIZE         1500
  #define RIPNG_PRIORITY_DEFAULT           0
  
-diff -durN zebra-0.93.orig/vtysh/vtysh.h zebra-0.93/vtysh/vtysh.h
---- zebra-0.93.orig/vtysh/vtysh.h	Sun Feb 11 04:37:34 2001
-+++ zebra-0.93/vtysh/vtysh.h	Sun Jul  7 17:54:52 2002
+diff -burNp zebra-0.95a/vtysh/vtysh.h zebra-0.95a-dud/vtysh/vtysh.h
+--- zebra-0.95a/vtysh/vtysh.h	2003-11-04 20:10:18.000000000 +0100
++++ zebra-0.95a-dud/vtysh/vtysh.h	2009-01-23 09:47:17.419767559 +0100
 @@ -40,12 +40,12 @@
  #define VTYSH_INDEX_MAX   6
  
@@ -80,9 +68,9 @@ diff -durN zebra-0.93.orig/vtysh/vtysh.h zebra-0.93/vtysh/vtysh.h
  
  /* vtysh local configuration file. */
  #define VTYSH_DEFAULT_CONFIG "vtysh.conf"
-diff -durN zebra-0.93.orig/zebra/zserv.h zebra-0.93/zebra/zserv.h
---- zebra-0.93.orig/zebra/zserv.h	Tue Jan 16 00:25:24 2001
-+++ zebra-0.93/zebra/zserv.h	Sun Jul  7 17:54:52 2002
+diff -burNp zebra-0.95a/zebra/zserv.h zebra-0.95a-dud/zebra/zserv.h
+--- zebra-0.95a/zebra/zserv.h	2001-01-16 00:25:24.000000000 +0100
++++ zebra-0.95a-dud/zebra/zserv.h	2009-01-23 09:43:46.633330294 +0100
 @@ -25,8 +25,8 @@
  /* Default port information. */
  #define ZEBRA_PORT                    2600
